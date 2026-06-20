@@ -21,6 +21,7 @@
   "height":128,
   "HTile":false,
   "layers":[
+    {"$GMImageLayer":"","%Name":"c52145b0-98dc-48ec-b0c6-cfac5849280c","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"c52145b0-98dc-48ec-b0c6-cfac5849280c","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"75f1eb2b-bfc9-4a53-825b-f5f6bb814ebd","blendMode":0,"displayName":"default","isLocked":false,"name":"75f1eb2b-bfc9-4a53-825b-f5f6bb814ebd","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"sprGuySpin0",

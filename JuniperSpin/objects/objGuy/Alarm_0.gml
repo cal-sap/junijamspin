@@ -1,0 +1,3 @@
+///stop spinning
+stateReady = true
+

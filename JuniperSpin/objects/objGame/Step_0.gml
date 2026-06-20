@@ -14,3 +14,7 @@ if _inputX != 0 || _inputY != 0 {
 }else{
 	player.aiState = GUY_STATE.IDLE
 }
+
+if keyboard_check_pressed(vk_space){
+	player.aiState = GUY_STATE.SPIN
+}
