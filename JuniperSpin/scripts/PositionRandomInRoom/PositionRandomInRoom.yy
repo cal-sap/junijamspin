@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PositionRandomInRoom",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PositionRandomInRoom",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
