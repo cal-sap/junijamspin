@@ -58,7 +58,7 @@ BehaveStartWalk = function(){
 
 BehaveStartSpin = function(){
         image_speed = 1
-		sprite_index = sprGuySpin
+		sprite_index = sprGuySpin0
 		state = GUY_STATE.SPIN
 }
 
