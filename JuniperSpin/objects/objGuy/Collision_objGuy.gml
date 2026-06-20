@@ -1,1 +1,1 @@
-show_debug_message("BOPOP!")
+show_debug_message("Collide")

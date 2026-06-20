@@ -19,3 +19,17 @@ if debug{
 		y+lengthdir_y(_arrowSize,move_direction),
 		20)
 }
+
+
+var _points = 120
+var _angleInc = 10
+draw_set_colour(c_red)
+draw_primitive_begin(pr_linestrip)
+var _mouseDist = point_distance(x,y,mouse_x,mouse_y)
+var _mouseDir = point_direction(x,y,mouse_x,mouse_y)
+
+for(var i = 0; i < _points; i++){
+	//draw_vertex(x+, _yy);
+}
+
+draw_primitive_end()

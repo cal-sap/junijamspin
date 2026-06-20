@@ -13,10 +13,10 @@ image_xscale = image_scale
 image_yscale = image_scale
 
 
-move_accel = 0.4	//these are additive to the speed
-move_decel = 0.2	//THIS IS A POSITIVE NUMBER
+move_accel = 0.5	//these are additive to the speed
+move_decel = 0.4	//THIS IS A POSITIVE NUMBER
 move_speed = {x:0,y:0}
-move_maxSpeed = 11
+move_maxSpeed = 16
 move_direction = 0 //Where the guy is physically moving, 
 
 facing = 1
