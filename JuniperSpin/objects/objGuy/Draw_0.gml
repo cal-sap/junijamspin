@@ -4,32 +4,40 @@
 #region DEBUG
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if debug{
-	draw_set_colour(c_lime)
+	draw_set_colour(debugColor)
 	draw_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,1)
-	
+
+//FIND THE TEXT
 	var _stateString = "state: "
-	
 	switch (state) {
 	    case GUY_STATE.IDLE:	_stateString += "IDLE";	break;
 	    case GUY_STATE.WALK:	_stateString += "WALK";	break;
 	    case GUY_STATE.SPIN:	_stateString += "SPIN";	break;
+	    case GUY_STATE.HURT:	_stateString += "HURT";	break;
 	    default:				_stateString += "?UNKNOWN?";	break;
 	}
-	
+	_stateString += $" ----- Spd:{Vec2Magnitude(move_speed)}"
 	if state == GUY_STATE.SPIN _stateString += $"\nSpin Level: {spin_level}"
-	
-	draw_text(x,y-100,_stateString)
+
+//MOVE DIRECTION ARROW
 	var _arrowSize = 100
 	draw_arrow(x,y,
 		x+lengthdir_x(_arrowSize,move_direction),
 		y+lengthdir_y(_arrowSize,move_direction),
 		20)
-	draw_set_colour(c_green)
+//DIRECTION ARROW
+	draw_set_colour(debugColor2)
 	draw_arrow(x,y,
 		x+lengthdir_x(_arrowSize,direction),
 		y+lengthdir_y(_arrowSize,direction),
 		20)
+		
+//PRINTING THE ACTUAL TEXT
+	draw_text(x,y-100,_stateString)
+	
 }
+
+
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~

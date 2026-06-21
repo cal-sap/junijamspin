@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PlaySound",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PlaySound",
+  "parent":{
+    "name":"JuniperSpin",
+    "path":"JuniperSpin.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
