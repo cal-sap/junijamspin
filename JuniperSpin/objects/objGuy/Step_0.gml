@@ -7,7 +7,7 @@ switch (state) {
 		SpriteFlipCheck()
 		switch (aiState) {
 		    case GUY_STATE.IDLE:	BehaveStartIdle()	break;
-		    case GUY_STATE.SPIN:	if objGame.debug_continuousSpin{BehaveContinueSpinStart()}else{BehaveStartSpin()}	break;
+		    case GUY_STATE.SPIN:	BehaveStartSpin()	break;
 		}
 	break;
 		
@@ -27,18 +27,14 @@ switch (state) {
 		
 		if spin_timeLeft > 0{		//Ending spin check
 		if (--spin_timeLeft == 0){
-			if objGame.debug_continuousSpin{
-				if spin_level < spin_levelMax-1{
-					BehaveLevelUpSpin()	//Level up automatically
-				}
-			}else{
-				BehaveStopSpin()	//end spinning
+			if spin_level < spin_levelMax-1{
+				BehaveLevelUpSpin()	//Level up automatically
 			}
 		}}
 		
 		switch (aiState) {
-			case GUY_STATE.SPIN:	if objGame.debug_continuousSpin{BehaveContinueSpin()}else{BehaveLevelUpSpin()}	break;	//check for ramping up
-			default: if objGame.debug_continuousSpin{BehaveStopSpin()}
+			case GUY_STATE.SPIN:	BehaveContinueSpin()	break;	//check for ramping up
+			default: BehaveStopSpin()
 		}
 		//}
 	break;
@@ -60,7 +56,7 @@ switch (state) {
 		UpdateFloatyMove()
 		switch (aiState) {
 		    case GUY_STATE.IDLE:	BehaveStartIdle()	break;	//edge case for when starting out
-		    case GUY_STATE.SPIN:	if objGame.debug_continuousSpin{BehaveContinueSpinStart()}else{BehaveStartSpin()}	break;
+		    case GUY_STATE.SPIN:	BehaveStartSpin()	break;
 			case GUY_STATE.WALK:	BehaveStartWalk()	break;
 		}
 
@@ -75,13 +71,7 @@ if (--spin_dustCloudStepLeft == 0){
 	spin_dustCloudStepLeft = spin_dustCloudStepMax
 }}
 
-if !objGame.debug_continuousSpin{
-	if spin_cooldownLeft > 0{
-	if (--spin_cooldownLeft == 0){
-		spin_ready = true;
-	}}
-
-}else if stamina == stamina_max{
+if stamina == stamina_max{
 	spin_ready = true;
 }
 

@@ -42,7 +42,7 @@ spin_cooldownMax = 60
 spin_cooldownLeft = 0
 spin_level = 0
 spin_levelMax = 7
-spin_lvl_sprite = [sprGuySpin0,sprGuySpin1,sprGuySpin2,sprGuySpin3,sprGuySpin4,sprGuySpin5,sprGuySpin6]
+spin_lvl_sprite =	[sprGuySpin0,sprGuySpin1,sprGuySpin2,sprGuySpin3,sprGuySpin4,sprGuySpin5,sprGuySpin6]
 spin_lvl_maxSpeed = [	16,	18,	20,	22,	24,	26,	28]
 spin_ready = true	//if you are not affected by cooldown
 spin_dustCloudStepMax = 7
@@ -51,8 +51,9 @@ spin_knockbackMult = 1.0
 spin_soundStart = sfxFireSpinStart
 spin_soundEnd = sfxSpinStart
 
-stamina_max = 200	//steps for a full bar
-stamina_spinCost = floor(stamina_max/(spin_levelMax+3))
+stamina_max = 400		//steps (60fps) for a full bar
+stamina_startCost = 50	//minimum downtime to take inbetween spins (prevents spamming)
+stamina_spinCost = 10	//additional cost of stamina when "shifting up" in power.
 stamina = stamina_max
 
 state = GUY_STATE.IDLE
@@ -76,39 +77,7 @@ BehaveStartWalk = function(){
 	sprite_index = spriteData_walk
 	state = GUY_STATE.WALK
 }
-BehaveStartSpin = function(){
-	if !spin_ready return;
-	if stamina < stamina_spinCost return;
-	spin_ready = false
-	stamina -= stamina_spinCost 
-	
-	state = GUY_STATE.SPIN
-	image_speed = 1
-	spin_level = 0
-	sprite_index = spin_lvl_sprite[spin_level]
-	spin_cooldownLeft = 0
-	spin_timeLeft = spin_timeMax	//refresh spin time
-	spin_dustCloudStepLeft = spin_dustCloudStepMax
-	
-	PlaySound(spin_soundStart)
-}
-BehaveContinueSpinStart = function(){
-	if !spin_ready return;
-	stamina -= stamina_spinCost*2
-	state = GUY_STATE.SPIN
-	spin_level = 0
-	image_speed = 1
-	sprite_index = spin_lvl_sprite[spin_level]
-	spin_timeLeft = spin_timeMax	//start counting spin time to level up
-	spin_dustCloudStepLeft = spin_dustCloudStepMax
-	PlaySound(spin_soundStart)
-}
-BehaveContinueSpin = function(){
-	if !spin_ready return;
-	stamina-= 0.5;
-	state = GUY_STATE.SPIN
-	if stamina <= 0 BehaveStopSpin()
-}
+
 BehaveStartHurt = function(_direction,_knockback){
 	hurt_timeLeft = hurt_timeMax
 	state = GUY_STATE.HURT
@@ -123,7 +92,25 @@ BehaveStopHurt = function(){
 	hurt_timeLeft = 0
 	BehaveStartIdle()	
 }
-	
+
+
+BehaveStartSpin = function(){
+	if !spin_ready return;
+	stamina -= stamina_startCost
+	state = GUY_STATE.SPIN
+	spin_level = 0
+	image_speed = 1
+	sprite_index = spin_lvl_sprite[spin_level]
+	spin_timeLeft = spin_timeMax	//start counting spin time to level up
+	spin_dustCloudStepLeft = spin_dustCloudStepMax
+	PlaySound(spin_soundStart)
+}
+BehaveContinueSpin = function(){
+	if !spin_ready return;
+	stamina--	
+	state = GUY_STATE.SPIN
+	if stamina <= 0 BehaveStopSpin()
+}
 BehaveStopSpin = function(){
 	//enforce a clean spinning reset
 	spin_timeLeft = 0
@@ -137,9 +124,8 @@ BehaveLevelUpSpin = function(){
 	if stamina < stamina_spinCost return;
 	if spin_level >= spin_levelMax-1 return;
 	spin_level++
-	if !objGame.debug_continuousSpin{
-		stamina -= stamina_spinCost
-	}
+	stamina -= stamina_spinCost	//"Shifting up" cost
+
 	sprite_index = spin_lvl_sprite[spin_level]
 	spin_timeLeft = spin_timeMax	//refresh spin time
 	
@@ -149,13 +135,6 @@ BehaveOnWallBounce = function(){
 	
 }
 
-//only used if move speed ins't a vector
-//function MoveInDirection(_direction){
-//	move_and_collide(
-//		lengthdir_x(move_speed,_direction),
-//		lengthdir_y(move_speed,_direction),
-//		[objGame.collideTilemap,objGuy])
-//}
 
 CollideWithGuy = function(_other){
 	///nudge out

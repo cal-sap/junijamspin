@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"PlaySound",
+  "%Name":"GlobalInitialize",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"PlaySound",
+  "name":"GlobalInitialize",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

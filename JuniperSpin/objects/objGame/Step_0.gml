@@ -16,11 +16,7 @@ if _inputX != 0 || _inputY != 0 {
 }
 
 
-if !debug_continuousSpin{
-	if keyboard_check_pressed(vk_space){
-		player.aiState = GUY_STATE.SPIN
-	}
-}else if keyboard_check(vk_space){
+if keyboard_check(vk_space){
 	player.aiState = GUY_STATE.SPIN
 }
 //AI CONTROLLER

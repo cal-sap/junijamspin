@@ -16,7 +16,7 @@ draw_text(10,10,_debugText)
 var _hbuff = 66
 var _width = 8
 var _vbuff = 22
-var _canSpin = player.stamina >= player.stamina_spinCost
+var _canSpin = player.spin_ready
 
 //Stamina bar with backing, showing cost
 draw_healthbar(_hbuff,room_height-_width-_vbuff,room_width-_hbuff,room_height-_vbuff,
