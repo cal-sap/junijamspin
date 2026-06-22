@@ -1,0 +1,1 @@
+sprite_index = sprUIBox	//go back to normal

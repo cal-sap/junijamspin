@@ -1,1 +1,2 @@
-room_goto(RoomLoading)
+room_restart()
+//room_goto(RoomLoading)

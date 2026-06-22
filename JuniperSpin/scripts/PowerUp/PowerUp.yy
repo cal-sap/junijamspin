@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"PowerUp",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PowerUp",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

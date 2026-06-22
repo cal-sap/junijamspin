@@ -1,0 +1,2 @@
+
+if popping visible = false;

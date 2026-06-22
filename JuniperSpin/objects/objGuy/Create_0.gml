@@ -19,34 +19,40 @@ spriteData_hurt = sprGuyHurt
 spriteData_dead = sprGuyDead
 debugColor = c_lime
 debugColor2 = c_green
+animSpeed = image_speed;
 
-move_accel = 0.5	//these are additive to the speed
-move_decel = 0.4	//THIS IS A POSITIVE NUMBER
-move_speed = {x:0,y:0}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region Gameplay Parameters Etc.
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+move_speed = {x:0,y:0}	//[NOT PARAMETER]
+move_direction = 0		//[NOT PARAMETER] Where the guy is physically moving, 
+move_accel = 0.5		//these are additive to the speed
+move_decel = 0.4		//THIS IS A POSITIVE NUMBER
 move_maxSpeed = 9
-move_direction = 0 //Where the guy is physically moving, 
 
-facing = 1
-faceGraceDegrees = 10	//you need to be facing the other direction by this amount to turn the sprite around
-targetPos = {x:x,y:y}
+targetPos = {x:x,y:y}		//[NOT PARAMETER]
+facing = 1					//[NOT PARAMETER] The Xscale of the sprite
+faceGraceDegrees = 10	//you need to be facing the other direction by this amount to turn the sprite around (10 = 80-100 degrees & 260-280)
 
 hp_max =	20
-hp =	hp_max
+hp =	hp_max			//[NOT PARAMETER]
 hurt_timeMax = 50
-hurt_timeLeft = 0
+hurt_timeLeft = 0		//[NOT PARAMETER]
 
-spin_decel = 0.1	//alternate movement tech when spinning, low frictionTHIS IS A POSITIVE NUMBER	
+spin_decel = 0.1	//alternate movement tech when spinning, low friction THIS IS A POSITIVE NUMBER	
 spin_timeMax = 40
-spin_timeLeft = 0
+spin_timeLeft = 0	//[NOT PARAMETER]
 spin_cooldownMax = 60
-spin_cooldownLeft = 0
-spin_level = 0
+spin_cooldownLeft = 0	//[NOT PARAMETER]
+spin_level = 0			//[NOT PARAMETER]
 spin_levelMax = 7
 spin_lvl_sprite =	[sprGuySpin0,sprGuySpin1,sprGuySpin2,sprGuySpin3,sprGuySpin4,sprGuySpin5,sprGuySpin6]
 spin_lvl_maxSpeed = [	16,	18,	20,	22,	24,	26,	28]
-spin_ready = true	//if you are not affected by cooldown
-spin_dustCloudStepMax = 7
-spin_dustCloudStepLeft = 0
+spin_ready = true	//[NOT PARAMETER] if you are not affected by cooldown
+spin_dustCloudStepMax = 7	
+spin_dustCloudStepLeft = 0	//[NOT PARAMETER]
 spin_knockbackMult = 1.0
 spin_soundStart = sfxFireSpinStart
 spin_soundEnd = sfxSpinStart
@@ -54,26 +60,33 @@ spin_soundEnd = sfxSpinStart
 stamina_max = 400		//steps (60fps) for a full bar
 stamina_startCost = 50	//minimum downtime to take inbetween spins (prevents spamming)
 stamina_spinCost = 10	//additional cost of stamina when "shifting up" in power.
+stamina_recoverMult = 1.5	//How much faster/slower stamina recovers than depletes
 stamina = stamina_max
 
-state = GUY_STATE.IDLE
-aiState = GUY_STATE.IDLE
-stateChanReady = true;
+state = GUY_STATE.IDLE		//[NOT PARAMETER]
+aiState = GUY_STATE.IDLE	//[NOT PARAMETER]
+stateChanReady = true;		//[NOT PARAMETER]
 
 debug_bounceWall = true;
-debug = true;
+debug = false;
+
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region State Behavior stuff
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BehaveStopIdle = function(){
 	targetPos = PositionRandomInRoom()
 	state = GUY_STATE.WALK
 }
 BehaveStartIdle = function(){
-    image_speed = 0
 	sprite_index = spriteData_idle
 	state = GUY_STATE.IDLE
 }
 BehaveStartWalk = function(){
-	image_speed = 1
 	sprite_index = spriteData_walk
 	state = GUY_STATE.WALK
 }
@@ -81,7 +94,6 @@ BehaveStartWalk = function(){
 BehaveStartHurt = function(_direction,_knockback){
 	hurt_timeLeft = hurt_timeMax
 	state = GUY_STATE.HURT
-	image_speed = 1
 	sprite_index = spriteData_hurt
 	direction = _direction
 	move_speed = Vec2Add(move_speed,Vec2FromMagDir(_knockback,_direction))
@@ -93,13 +105,11 @@ BehaveStopHurt = function(){
 	BehaveStartIdle()	
 }
 
-
 BehaveStartSpin = function(){
 	if !spin_ready return;
 	stamina -= stamina_startCost
 	state = GUY_STATE.SPIN
 	spin_level = 0
-	image_speed = 1
 	sprite_index = spin_lvl_sprite[spin_level]
 	spin_timeLeft = spin_timeMax	//start counting spin time to level up
 	spin_dustCloudStepLeft = spin_dustCloudStepMax
@@ -132,11 +142,16 @@ BehaveLevelUpSpin = function(){
 	PlaySound(spin_soundStart,1+(0.12*spin_level))
 }
 BehaveOnWallBounce = function(){
-	
+
+
 }
 
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
 
 CollideWithGuy = function(_other){
+	if PAUSED return;
 	///nudge out
 	var _awayDir = point_direction(_other.x,_other.y,x,y)
 	move_speed = Vec2Add(move_speed,	new Vec2(
@@ -144,6 +159,10 @@ CollideWithGuy = function(_other){
 		lengthdir_y(objGame.guyNudgeSpeed,_awayDir)))
 }
 
+UpdateAnimSpeed = function(){
+	if PAUSED image_speed = 0;	else image_speed = animSpeed;
+}
+UpdateAnimSpeed()	//Do whatever the pause functionality is when this is created.
 
 function SpriteFlipCheck(){
 	if facing == 1{

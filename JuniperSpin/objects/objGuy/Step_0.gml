@@ -1,4 +1,5 @@
 
+if PAUSED return;
 
 switch (state) {
 
@@ -76,7 +77,7 @@ if stamina == stamina_max{
 }
 
 
-//GET STAMINA STUFF
+//RECOVER STAMINA
 if state != GUY_STATE.SPIN{
-	if stamina < stamina_max stamina = min(stamina+1,stamina_max)
+	if stamina < stamina_max stamina = min(stamina+stamina_recoverMult,stamina_max)
 }
