@@ -7,41 +7,11 @@ HPDROP,
 HPMAX,
 MONEYDROP,
 MONEYUP,
-SPINLEVEL,
+STAMINA,
 SPEEDMAX,
 COUNT
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#region Configs
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-powerUp =	array_create(POWERUP.COUNT)	//(order is decided through enum)
-powerUp[POWERUP.ATTACK]=	new PowerUp("Attack",				sprUpgradesAttack,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.ATTACK		}))
-powerUp[POWERUP.CONTROL]=	new PowerUp("Control",				sprUpgradesControl,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.CONTROL		})) 
-powerUp[POWERUP.HPDROP]=	new PowerUp("Hp Drop\nChance",		sprUpgradesHealthDropChance,	5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.HPDROP		})) 
-powerUp[POWERUP.HPMAX]=		new PowerUp("Max Health",			sprUpgradesHealthUp,			5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.HPMAX		})) 
-powerUp[POWERUP.MONEYDROP]=	new PowerUp("Money Drop\nChance",	sprUpgradesMoneyDropChance,		5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.MONEYDROP	})) 
-powerUp[POWERUP.MONEYUP]=	new PowerUp("Money Value",			sprUpgradesMoneyUp,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.MONEYUP		})) 
-powerUp[POWERUP.SPINLEVEL]=	new PowerUp("Spin Level",			sprUpgradesStrengthUp,			5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.SPINLEVEL	})) 
-powerUp[POWERUP.SPEEDMAX]=	new PowerUp("Max Speed",			sprUpgradesSpeedUp,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.SPEEDMAX	})) 
-
-guyNudgeSpeed = 0.5	//the magnitude applied to enemies when touching. A constant weak force, prevents overlapping
-invMoney = 120		//
-healthStart = 3		//
-healthMaxMax =	healthStart+powerUp[POWERUP.HPMAX].lvlMax		//The highest that Health can go
-invHealth =		healthStart		//
-invHealthMax =	healthStart		//
-
-for(var i = 0; i < healthMaxMax; i++){
-	instance_create_layer(40+70*i,room_height-100,"GUI",objHeartMark)
-}
-
-#endregion
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-collideTilemap = layer_tilemap_get_id("Walls");
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region Manage Guys
@@ -61,14 +31,113 @@ function PlayerCollideEnemy(_other){
 	}
 }
 player.CollideWithGuy = method(player,PlayerCollideEnemy)
+player.drawDirectionArrow = true
 
 enemies = []
-enemyCt = 5
+enemyCt = 0
 for (var i = 0; i < enemyCt; ++i) {
     enemies[i] = instance_create_layer(222+222*i,400,"Guys",objEnemy)
 }	
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region Powerup Configs
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//POWERUP CONFIG
+
+powerUp =	array_create(POWERUP.COUNT)	//(order is decided through enum)
+powerUp[POWERUP.ATTACK]=	new PowerUp("Attack",				sprUpgradesAttack,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.ATTACK		}))
+powerUp[POWERUP.CONTROL]=	new PowerUp("Control",				sprUpgradesControl,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.CONTROL		})) 
+powerUp[POWERUP.HPDROP]=	new PowerUp("Hp Drop\nChance",		sprUpgradesHealthDropChance,	5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.HPDROP		})) 
+powerUp[POWERUP.HPMAX]=		new PowerUp("Max Health",			sprUpgradesHealthUp,			5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.HPMAX		})) 
+powerUp[POWERUP.MONEYDROP]=	new PowerUp("Money Drop\nChance",	sprUpgradesMoneyDropChance,		5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.MONEYDROP	})) 
+powerUp[POWERUP.MONEYUP]=	new PowerUp("Recovery",				sprUpgradesSpeedUp,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.MONEYUP		})) 
+powerUp[POWERUP.STAMINA]=	new PowerUp("Stamina",				sprUpgradesSpeedUp,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.STAMINA		})) 
+powerUp[POWERUP.SPEEDMAX]=	new PowerUp("Max Velocity",			sprUpgradesStrengthUp,			5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.SPEEDMAX	})) 
+
+guyNudgeSpeed = 0.5	//the magnitude applied to enemies when touching. A constant weak force, prevents overlapping
+
+healthStart = 3		//
+healthMaxMax =	healthStart+powerUp[POWERUP.HPMAX].lvlMax		//The highest that Health can go
+
+
+//POWERUP EFFECTS
+function UpdatePowerUp(_powerupIndex){
+	var _powRatio = powerUp[_powerupIndex].level / powerUp[_powerupIndex].lvlMax 
+	switch(_powerupIndex) {
+		case POWERUP.ATTACK:
+			player.damage =	lerp(	2,		10,	_powRatio)		
+		break;
+		case POWERUP.CONTROL:
+			player.move_accel =	lerp(	0.5,	1,	_powRatio)		//these are additive to the speed
+			player.move_decel =	lerp(	0.4,	1,	_powRatio)		//THIS IS A POSITIVE NUMBER
+			player.spin_accel =	lerp(	0.5,	2,	_powRatio)	
+			player.spin_decel =	lerp(	0.1,	0.5,_powRatio)	
+		break;
+		case POWERUP.HPDROP:
+			//CODE HERE
+		break;
+		case POWERUP.HPMAX:
+			invHealthMax = healthStart+powerUp[POWERUP.HPMAX].level
+			invHealth = invHealthMax
+			UpdateHealth()
+		break;
+		case POWERUP.MONEYDROP:
+			//CODE HERE
+		break;
+		case POWERUP.MONEYUP:	//SUBSITUTE FOR RECOVERY REPLACE THE ENUM FOR THIS EVENTUALLY
+			player.stamina_recoverMult =	lerp(	1,		4,	_powRatio)		
+		break;
+		case POWERUP.STAMINA:
+			player.stamina_max =			lerp(	200,	600,_powRatio)	
+			player.stamina = player.stamina_max
+		break;
+		case POWERUP.SPEEDMAX:
+			player.spin_levelMax = powerUp[_powerupIndex].level
+		break;
+	}
+}
+
+
+
+
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region HEARTS & MONEY
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+invMoney = 120					//
+invHealth =		healthStart		//
+invHealthMax =	healthStart		//
+							//healthMaxMax is in powerup section
+heartGraphic = []
+
+//MAKE HEART GRAPHICS
+for(var i = 0; i < healthMaxMax; i++){
+	heartGraphic[i] = instance_create_layer(40+70*i,room_height-100,"GUI",objHeartMark)
+	heartGraphic[i].visible = false;
+}
+
+//Trim to just used hearts
+for(var i = 0; i < healthStart; i++){
+	heartGraphic[i].visible = true;
+}
+
+
+
+	
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region UX / UI
@@ -97,3 +166,35 @@ function ToggleShop(_open = !shopOpen){
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region ????
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function Damage(){
+	invHealth--
+	UpdateHealth()
+}
+function UpdateHealth(){
+	//Trim to just used hearts (update hearts)
+	for(var i = 0; i < healthMaxMax; i++){
+		if i < invHealth{
+			heartGraphic[i].Recover()
+		}else{
+			heartGraphic[i].Pop()
+		}
+	}	
+}
+
+
+//APPLY POWERUP VALUES (may be different than objGuy defualt)
+for(var i = 0; i < POWERUP.COUNT; i++){
+	UpdatePowerUp(i)
+}
+
+collideTilemap = layer_tilemap_get_id("Walls");

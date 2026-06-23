@@ -72,12 +72,15 @@ if (--spin_dustCloudStepLeft == 0){
 	spin_dustCloudStepLeft = spin_dustCloudStepMax
 }}
 
-if stamina == stamina_max{
-	spin_ready = true;
-}
+
 
 
 //RECOVER STAMINA
 if state != GUY_STATE.SPIN{
 	if stamina < stamina_max stamina = min(stamina+stamina_recoverMult,stamina_max)
+	else {
+		stamina = stamina_max
+		spin_ready = true;
+	}
+	
 }

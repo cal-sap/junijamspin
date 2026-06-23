@@ -8,6 +8,9 @@ function Pop(){
 }
 
 function Recover(){
+	visible = true
+	popping = false;
+	sprite_index = sprUIHeart
 	image_index = floor(0.01*x)*0.6;
 }
 

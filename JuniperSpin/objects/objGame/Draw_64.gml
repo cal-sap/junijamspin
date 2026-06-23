@@ -84,9 +84,17 @@ draw_healthbar(_hbuff,room_height-_width-_vbuff+1,room_width-_hbuff,room_height-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#region Draw the GUI
+#region Draw the Money Counter
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+var _ratio = min(invMoney/200,1)	//Min to maximum money val
+var _scale = lerp(1,	2,	_ratio)	//Min to maximum scale
+draw_set_colour(c_white)
+draw_set_font(fontMenu)
+draw_sprite_ext(sprUIMoneyCenter,0,
+			room_width-110,room_height*0.8,_scale,_scale,0,c_white,1)
+draw_text(	room_width-80,room_height*0.8,$"x{invMoney}")
+//draw_text_transformed(room_width-40,room_height*0.9,$"x{invMoney}",_scale,_scale,0)
 	
 	
 	

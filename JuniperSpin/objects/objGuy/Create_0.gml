@@ -20,6 +20,7 @@ spriteData_dead = sprGuyDead
 debugColor = c_lime
 debugColor2 = c_green
 animSpeed = image_speed;
+drawDirectionArrow = false;
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,26 +37,31 @@ targetPos = {x:x,y:y}		//[NOT PARAMETER]
 facing = 1					//[NOT PARAMETER] The Xscale of the sprite
 faceGraceDegrees = 10	//you need to be facing the other direction by this amount to turn the sprite around (10 = 80-100 degrees & 260-280)
 
-hp_max =	20
+hp_max =	20			//****PLAYER HEALTH IS HANDLED IN objGame.invHealth
 hp =	hp_max			//[NOT PARAMETER]
 hurt_timeMax = 50
 hurt_timeLeft = 0		//[NOT PARAMETER]
+damage = 1;				//damage dealt by player spinnning, or enemy touch
 
-spin_decel = 0.1	//alternate movement tech when spinning, low friction THIS IS A POSITIVE NUMBER	
+spin_accel = move_accel	//
+spin_decel = 0.1		//alternate movement tech when spinning, low friction THIS IS A POSITIVE NUMBER	
 spin_timeMax = 40
 spin_timeLeft = 0	//[NOT PARAMETER]
 spin_cooldownMax = 60
 spin_cooldownLeft = 0	//[NOT PARAMETER]
 spin_level = 0			//[NOT PARAMETER]
-spin_levelMax = 7
+spin_levelMaxMax = 7	//The maximum level of spins there are
+spin_levelMax = 7		//the maximum level of spin you have access to
 spin_lvl_sprite =	[sprGuySpin0,sprGuySpin1,sprGuySpin2,sprGuySpin3,sprGuySpin4,sprGuySpin5,sprGuySpin6]
 spin_lvl_maxSpeed = [	16,	18,	20,	22,	24,	26,	28]
 spin_ready = true	//[NOT PARAMETER] if you are not affected by cooldown
-spin_dustCloudStepMax = 7	
+spin_dustCloudStepMax = 6
 spin_dustCloudStepLeft = 0	//[NOT PARAMETER]
 spin_knockbackMult = 1.0
 spin_soundStart = sfxFireSpinStart
 spin_soundEnd = sfxSpinStart
+
+
 
 stamina_max = 400		//steps (60fps) for a full bar
 stamina_startCost = 50	//minimum downtime to take inbetween spins (prevents spamming)
@@ -181,8 +187,12 @@ function UpdateMoveDirection(_updatePointingDirection = false){
 	if _updatePointingDirection direction = move_direction
 }
 function UpdateFloatyMove(_acceldir = undefined,_maxSp = move_maxSpeed){
+	var _accel = move_accel
 	var _decel = move_decel
-	if state == GUY_STATE.SPIN _decel = spin_decel
+	if state == GUY_STATE.SPIN{
+		_accel = spin_accel
+		_decel = spin_decel
+	}
 	var _mag = Vec2Magnitude(move_speed)		//how fast its currently moving
 	
 	if is_undefined(_acceldir) || _mag > _maxSp{	//Not acceling in any direction OR going too fast, slow down
@@ -190,19 +200,16 @@ function UpdateFloatyMove(_acceldir = undefined,_maxSp = move_maxSpeed){
 			move_speed = {x:0,y:0}
 		}else{
 			var _decelVec2 = Vec2FromMagDir(-_decel,move_direction)	//how much this slows down
-			move_speed = Vec2Add(move_speed,_decelVec2)					//apply deceleration
+			move_speed = Vec2Add(move_speed,_decelVec2)				//apply deceleration
 			UpdateMoveDirection()
 		}
 		
 	}else{				//accelerating in a given direction
 	//find acceleration vector
-		var _accelVec2 = Vec2FromMagDir(move_accel,_acceldir)	
+		var _accelVec2 = Vec2FromMagDir(_accel,_acceldir)	
 	//apply acceleration
 		move_speed = Vec2Add(move_speed,_accelVec2)		
-	//limit the max speed
-		//if Vec2Magnitude(move_speed) > _maxSp{	
-		//	move_speed = Vec2Normalize(move_speed,_maxSp)
-		//}
+
 	//update direction you are moving.
 		UpdateMoveDirection()
 	}

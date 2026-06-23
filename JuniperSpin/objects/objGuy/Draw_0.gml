@@ -37,7 +37,9 @@ if debug{
 	
 }
 
-
+if drawDirectionArrow{
+	draw_sprite_ext(sprUIDirectionArrow,0,x,y,1,1,move_direction,c_white,1)
+}
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,14 +68,14 @@ draw_primitive_end()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#region Draw the "spin bar"
+#region Draw the "spin bar" (no longer used?)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-if state == GUY_STATE.SPIN{
-	DrawUISpinBar(spin_timeLeft/spin_timeMax)
-}else if !spin_ready{
-	DrawUISpinBar(1-(spin_cooldownLeft/spin_cooldownMax),c_blue)
-}
+//	
+//if state == GUY_STATE.SPIN{
+//	DrawUISpinBar(spin_timeLeft/spin_timeMax)
+//}else if !spin_ready{
+//	DrawUISpinBar(1-(spin_cooldownLeft/spin_cooldownMax),c_blue)
+//}
 
 
 #endregion
