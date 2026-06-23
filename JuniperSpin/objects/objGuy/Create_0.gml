@@ -21,6 +21,7 @@ debugColor = c_lime
 debugColor2 = c_green
 animSpeed = image_speed;
 drawDirectionArrow = false;
+drawHP = false;
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,3 +246,11 @@ function DrawUISpinBar(_amount,_color = c_aqua){
 	var _minCol = merge_colour(_color,c_black,0.5)
 	draw_healthbar(x-40,y-60,x+40,y-55,_amount *100,c_black,_minCol,_color,0,1,1)
 }
+	
+Damage = function(_amount){
+	show_debug_message(hp)
+	hp -= _amount
+	if hp < 0
+	OnDeath()
+}
+OnDeath = function(){}

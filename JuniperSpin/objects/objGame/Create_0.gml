@@ -26,18 +26,19 @@ function PlayerCollideEnemy(_other){
 	if state == GUY_STATE.SPIN{
 		var _spd = Vec2Magnitude(move_speed)				//force to hurt enemy
 		_other.BehaveStartHurt(_dir, max(10,spin_knockbackMult*_spd))
+		_other.Damage(damage)	
+//BE DAMAGED BY OTHER
 	}else if state != GUY_STATE.HURT{
 		BehaveStartHurt(_dir, -15)
+		objGame.Damage()
 	}
 }
 player.CollideWithGuy = method(player,PlayerCollideEnemy)
+
 player.drawDirectionArrow = true
 
-enemies = []
-enemyCt = 0
-for (var i = 0; i < enemyCt; ++i) {
-    enemies[i] = instance_create_layer(222+222*i,400,"Guys",objEnemy)
-}	
+
+
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -170,8 +171,47 @@ function ToggleShop(_open = !shopOpen){
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#region ????
+#region ENEMY SPAWNS
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+enemies =	[]
+enemyCt =	0
+waves =		[]
+
+array_push(waves,[[objEnemy, 1],[objEnemy, 2]])
+
+
+EnemyOnDeath = function(){	//what enemy does on death
+	//Spawn a Coin maybe
+	
+	
+	
+	//reduce the counter
+	objGame.enemyCt--
+	
+	
+	
+	instance_destroy()
+}
+
+function AddEnemy(_enemyType, _count = 1){	//add enemy to the field (NEEDS WORK)
+	var _newEnemy;
+	repeat(_count){
+		array_push(enemies,instance_create_layer(irandom_range(222,1000),400,"Guys",_enemyType))
+		_newEnemy = array_last(enemies)
+		_newEnemy.OnDeath = method(_newEnemy,EnemyOnDeath)
+	}
+	enemyCt	+=_count
+}
+
+
+function SpawnWave(_waveNumber){
+	var _wave = waves[_waveNumber]
+	var _eType;
+	for(var i = 0; i < array_length(_wave); i++){
+		_eType = _wave[i]
+		AddEnemy(_eType[0],_eType[1])	//Add the given number of the given enemy
+	}
+}
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,6 +219,9 @@ function ToggleShop(_open = !shopOpen){
 function Damage(){
 	invHealth--
 	UpdateHealth()
+	if invHealth <= 0{
+		room_restart()
+	}
 }
 function UpdateHealth(){
 	//Trim to just used hearts (update hearts)
@@ -198,3 +241,4 @@ for(var i = 0; i < POWERUP.COUNT; i++){
 }
 
 collideTilemap = layer_tilemap_get_id("Walls");
+alarm[0] = 100

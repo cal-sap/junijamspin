@@ -19,11 +19,19 @@ if _inputX != 0 || _inputY != 0 {
 if keyboard_check(vk_space){
 	player.aiState = GUY_STATE.SPIN
 }
+
 //AI CONTROLLER
-for (var i = 0; i < enemyCt; ++i) {
-	var _enemy = enemies[i]
-    _enemy.aiState = GUY_STATE.WALK
-	_enemy.direction = point_direction(_enemy.x,_enemy.y,player.x,player.y)
+//MAYBE YOU SHOULD REMOVE THE enemies[] ARRAY SINCE I DONT WANT TO FIND THE INDEX AGAIN
+
+//OLD VERSION
+//for (var i = 0; i < enemyCt; ++i) {
+//	var _enemy = enemies[i]
+//    _enemy.aiState = GUY_STATE.WALK
+//	_enemy.direction = point_direction(_enemy.x,_enemy.y,player.x,player.y)
+//}
+
+
+with objEnemy {
+    aiState = GUY_STATE.WALK	//REPLACE A BEHAVIOR FUNCTION HERE
+	direction = point_direction(x,y,objGame.player.x,objGame.player.y)
 }
-
-

@@ -8,3 +8,4 @@ mask_index		= sprSandersWalk
 move_maxSpeed	= 3
 debugColor		= c_maroon
 debugColor2		= merge_colour(c_maroon,c_black,0.5)
+drawHP = true;

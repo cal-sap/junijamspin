@@ -70,12 +70,10 @@ draw_primitive_end()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region Draw the "spin bar" (no longer used?)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//	
-//if state == GUY_STATE.SPIN{
-//	DrawUISpinBar(spin_timeLeft/spin_timeMax)
-//}else if !spin_ready{
-//	DrawUISpinBar(1-(spin_cooldownLeft/spin_cooldownMax),c_blue)
-//}
+	
+if drawHP{
+	DrawUISpinBar(hp/hp_max,c_maroon)
+}
 
 
 #endregion
