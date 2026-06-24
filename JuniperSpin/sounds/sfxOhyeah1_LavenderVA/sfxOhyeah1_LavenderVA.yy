@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxOhyeah1_LavenderVA",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.0333107,
+  "exportDir":"",
+  "name":"sfxOhyeah1_LavenderVA",
+  "parent":{
+    "name":"Taunt_BKing",
+    "path":"folders/Sounds/Enemy/BKing/Taunt_BKing.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxOhyeah1_LavenderVA.wav",
+  "volume":1.0,
+}

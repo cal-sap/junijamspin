@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Sandy_Damage_05",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.8591383,
+  "exportDir":"",
+  "name":"Sandy_Damage_05",
+  "parent":{
+    "name":"Hurt_Sandy",
+    "path":"folders/Sounds/Enemy/ColonalSandy/Hurt_Sandy.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Sandy_Damage_05.ogg",
+  "volume":1.0,
+}

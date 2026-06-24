@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxBiggerbetter2_LavenderVA",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.2871883,
+  "exportDir":"",
+  "name":"sfxBiggerbetter2_LavenderVA",
+  "parent":{
+    "name":"Taunt_BKing",
+    "path":"folders/Sounds/Enemy/BKing/Taunt_BKing.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxBiggerbetter2_LavenderVA.wav",
+  "volume":1.0,
+}

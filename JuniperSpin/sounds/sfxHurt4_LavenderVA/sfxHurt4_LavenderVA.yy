@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxHurt4_LavenderVA",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.56609976,
+  "exportDir":"",
+  "name":"sfxHurt4_LavenderVA",
+  "parent":{
+    "name":"Hurt_BKing",
+    "path":"folders/Sounds/Enemy/BKing/Hurt_BKing.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxHurt4_LavenderVA.wav",
+  "volume":1.0,
+}

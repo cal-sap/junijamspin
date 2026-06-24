@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Sandy_Taunt_02",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.9257823,
+  "exportDir":"",
+  "name":"Sandy_Taunt_02",
+  "parent":{
+    "name":"Taunt_Sandy",
+    "path":"folders/Sounds/Enemy/ColonalSandy/Taunt_Sandy.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Sandy_Taunt_02.ogg",
+  "volume":1.0,
+}
