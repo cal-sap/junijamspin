@@ -1,4 +1,9 @@
 global.useTestWaves = false	//w
+global.enemyList = [objEnemy,objEnemyBeaver];	//this isn't going to be used, but needs to be defined for some reason
+
+#macro WINDOWW 1280
+#macro WINDOWH 720
+
 
 ///LOAD ALL OF THE DATAS
 if (file_exists("waveData.json")){
@@ -38,3 +43,4 @@ if (file_exists("testWaveData.json")){
 //	file_text_close(_file);
 //
 //	var _data = json_parse(_jsonStr)
+

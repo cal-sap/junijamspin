@@ -5,6 +5,8 @@ enum GUY_STATE{
 	WALK,
 	SPIN,
 	HURT,
+	PREP,
+	ATTACK,
 	CLASH
 }
 
@@ -250,7 +252,7 @@ function DrawUISpinBar(_amount,_color = c_aqua){
 Damage = function(_amount){
 	show_debug_message(hp)
 	hp -= _amount
-	if hp < 0
+	if hp <= 0
 	OnDeath()
 }
 OnDeath = function(){}

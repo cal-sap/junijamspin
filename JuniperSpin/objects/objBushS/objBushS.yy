@@ -1,19 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"objEnemy",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"objBushS",
+  "eventList":[],
   "managed":true,
-  "name":"objEnemy",
+  "name":"objBushS",
   "overriddenProperties":[],
   "parent":{
-    "name":"Enemies",
-    "path":"folders/Objects/Enemies.yy",
+    "name":"Foliage",
+    "path":"folders/Objects/Foliage.yy",
   },
   "parentObjectId":{
-    "name":"objGuy",
-    "path":"objects/objGuy/objGuy.yy",
+    "name":"objGrass",
+    "path":"objects/objGrass/objGrass.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprSandersWalk",
-    "path":"sprites/sprSandersWalk/sprSandersWalk.yy",
+    "name":"sprBushS",
+    "path":"sprites/sprBushS/sprBushS.yy",
   },
   "spriteMaskId":null,
   "visible":true,

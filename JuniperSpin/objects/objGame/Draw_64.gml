@@ -1,12 +1,23 @@
 
-var _debugText = ""
-_debugText += $"x:{player.x}\n"
-_debugText += $"y:{player.y}\n"
-_debugText += $"speed:{player.move_speed}\n"
 
 
-draw_set_colour(c_black)
-draw_text(10,10,_debugText)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region Draw Debugs
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	var _debugText = ""
+	_debugText += $"R: Reset\n"
+	_debugText += $"M: Mute\n"
+	_debugText += $"O: Switch to Test waves\n"
+	_debugText += $"P: Big Money\n"
+
+
+	draw_set_colour(c_aqua)
+	draw_set_font(fontSmall)
+	draw_text(10,10,_debugText)
+
+	
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +72,6 @@ draw_set_valign(fa_top)
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region Draw the "Stamina bar"
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,11 +82,11 @@ var _vbuff = 22
 var _canSpin = player.spin_ready
 
 //Stamina bar with backing, showing cost
-draw_healthbar(_hbuff,room_height-_width-_vbuff,room_width-_hbuff,room_height-_vbuff,
+draw_healthbar(_hbuff,WINDOWH-_width-_vbuff,WINDOWW-_hbuff,WINDOWH-_vbuff,
 	(_canSpin?player.stamina/player.stamina_max:0)*100,	//only show back bar when can spin
 	_canSpin?c_black:#391d27,c_lime,c_lime,0,1,1)		//offcolor back when not able to spin
 	
-draw_healthbar(_hbuff,room_height-_width-_vbuff+1,room_width-_hbuff,room_height-_vbuff-2,
+draw_healthbar(_hbuff,WINDOWH-_width-_vbuff+1,WINDOWW-_hbuff,WINDOWH-_vbuff-2,
 	(player.stamina-(_canSpin*player.stamina_spinCost))/player.stamina_max*100,
 	c_black,c_olive,c_green,0,0,0)
 
@@ -92,12 +102,22 @@ var _scale = lerp(1,	2,	_ratio)	//Min to maximum scale
 draw_set_colour(c_white)
 draw_set_font(fontMenu)
 draw_sprite_ext(sprUIMoneyCenter,0,
-			room_width-110,room_height*0.8,_scale,_scale,0,c_white,1)
-draw_text(	room_width-80,room_height*0.8,$"x{invMoney}")
+			WINDOWW-110,WINDOWH*0.8,_scale,_scale,0,c_white,1)
+draw_text(	WINDOWW-80,WINDOWH*0.8,$"x{invMoney}")
 
 	
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region Draw the WAVE Counter
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+draw_set_colour(c_white)
+var _waveString = $"[Wave {currentWave+1}]: {enemyCt} Enemies remain"
+draw_text(400,30,_waveString)
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~ cv
+
 
 
 if global.useTestWaves{
@@ -106,5 +126,5 @@ if global.useTestWaves{
 				44*(current_second mod 2 == 0),
 				"[RUNNING testWaveData.json]")
 }
-//draw_text_transformed(room_width-40,room_height*0.9,$"x{invMoney}",_scale,_scale,0)
+//draw_text_transformed(WINDOWW-40,WINDOWH*0.9,$"x{invMoney}",_scale,_scale,0)
 	

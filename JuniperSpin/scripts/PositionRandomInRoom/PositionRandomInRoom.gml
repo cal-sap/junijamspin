@@ -1,3 +1,3 @@
 function PositionRandomInRoom(){
-	return {x: irandom(room_width), y: irandom(room_height)}
+	return {x: irandom(WINDOWW), y: irandom(WINDOWH)}
 }

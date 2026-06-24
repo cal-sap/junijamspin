@@ -1,3 +1,5 @@
 [
-[["objEnemy", 1],["objEnemy", 1]]
+[["objEnemyBeaver", 2],["objEnemy", 1]],
+[["objEnemyBeaver", 3],["objEnemy", 1]],
+[["objEnemyBeaver", 2],["objEnemy", 2]]
 ]

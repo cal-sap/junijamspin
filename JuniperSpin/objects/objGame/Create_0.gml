@@ -43,7 +43,6 @@ player.drawDirectionArrow = true
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region Powerup Configs
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,7 +123,7 @@ heartGraphic = []
 
 //MAKE HEART GRAPHICS
 for(var i = 0; i < healthMaxMax; i++){
-	heartGraphic[i] = instance_create_layer(40+70*i,room_height-100,"GUI",objHeartMark)
+	heartGraphic[i] = instance_create_layer(40+70*i,WINDOWH-100,"GUI",objHeartMark)
 	heartGraphic[i].visible = false;
 }
 
@@ -144,11 +143,11 @@ for(var i = 0; i < healthStart; i++){
 #region UX / UI
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-instance_create_layer(64,576,"Control",objDebugButton,{
-	OnDraw: function(){draw_text(x-20,590,$"Toggle Mute:{MUTED}")},
-	OnClickFunc: function(){MUTED = !MUTED}
-	
-	})
+//instance_create_layer(64,576,"Control",objDebugButton,{
+//	OnDraw: function(){draw_text(x-20,590,$"Toggle Mute:{MUTED}")},
+//	OnClickFunc: function(){MUTED = !MUTED}
+//	
+//	})
 
 shopOpen = false;
 
@@ -169,34 +168,66 @@ function ToggleShop(_open = !shopOpen){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region MUSIC
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if !audio_is_playing(soundTheme){
+	audio_play_sound(soundTheme,10,1)
+}
+function ToggleMute(_muted = !MUTED){
+	MUTED = _muted
+	audio_sound_gain(soundTheme,!MUTED,100)
+	
+}
+
+	
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region ENEMY SPAWNS
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 enemies =	[]
+currentWave = 0;
 enemyCt =	0
-waves =		[]
+validSpawns = []
 
-array_push(waves,[[objEnemy, 1],[objEnemy, 2]])
+waves =		global.waveData
+if global.useTestWaves{
+	waves = global.testWaveData
+}
+maxWaves =	array_length(waves)
 
+
+//array_push(waves,[[objEnemy, 1],[objEnemy, 2]])
 
 EnemyOnDeath = function(){	//what enemy does on death
 	//Spawn a Coin maybe
-	
-	
-	
+
 	//reduce the counter
 	objGame.enemyCt--
-	
-	
-	
+
 	instance_destroy()
+	objGame.EndOfWaveCheck()
+}
+
+function EndOfWaveCheck(){
+	if enemyCt == 0{
+		currentWave++
+	
+		//TEST CASE TO LOOP WAVES
+		currentWave = currentWave mod maxWaves
+		SpawnWave(currentWave)
+	}
 }
 
 function AddEnemy(_enemyType, _count = 1){	//add enemy to the field (NEEDS WORK)
 	var _newEnemy;
 	repeat(_count){
-		array_push(enemies,instance_create_layer(irandom_range(222,1000),400,"Guys",_enemyType))
+		var _spawner = validSpawns[irandom(array_length(validSpawns)-1)]
+		
+		array_push(enemies,instance_create_layer(_spawner.x,_spawner.y,"Guys",_enemyType))
 		_newEnemy = array_last(enemies)
 		_newEnemy.OnDeath = method(_newEnemy,EnemyOnDeath)
 	}
@@ -208,37 +239,16 @@ function SpawnWave(_waveNumber){
 	var _wave = global.waveData[_waveNumber]
 	if global.useTestWaves _wave = global.testWaveData[_waveNumber]
 	
+	validSpawns = []
+	with objSpawner CheckReady()
+	show_debug_message($"VALID SPAWNS: {validSpawns}")
+	
 	var _eGroup;
+	
 	for(var i = 0; i < array_length(_wave); i++){
 		_eGroup = _wave[i]	//a number of the same enemies
 		AddEnemy(asset_get_index(_eGroup[0]),_eGroup[1])	//Add the given number of the given enemy
 	}
-}
-
-fundData = ""
-if (file_exists("testWaves.json")){
-    var _file = file_text_open_read("testWaves.json");
-	var _jsonStr = ""
-	while (!file_text_eof(_file))
-	{
-	    _jsonStr += file_text_readln(_file);
-	}
-	file_text_close(_file);
-
-	var _data = json_parse(_jsonStr)
-
-	
-	show_debug_message($"PLAIN DATA: {_data}")
-	show_debug_message($"WAVE	_data[0]: {_data[0]}")
-	show_debug_message($"ENEMY	_data[0][0]: {_data[0][0]}")
-	show_debug_message($"NAME	_data[0][0]: {_data[0][0][0]}")
-fundData = _data
-
-	//show_debug_message(_jsonStr)
-	//show_debug_message($"stringify {json_stringify(_jsonStr)}")
-	//show_debug_message($"Parse {json_parse(_jsonStr)}")
-	//show_debug_message($"S&P {json_parse(json_stringify(_jsonStr))}")
-
 }
 
 
@@ -270,4 +280,7 @@ for(var i = 0; i < POWERUP.COUNT; i++){
 }
 
 collideTilemap = layer_tilemap_get_id("Walls");
-alarm[0] = 100
+
+//ToggleMute()
+alarm[0] = 1	//Spawns the first wave... needs to wait until spawners are present
+	
