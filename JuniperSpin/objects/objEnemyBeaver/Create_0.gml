@@ -1,5 +1,5 @@
 event_inherited()
-image_blend = c_black
+image_blend = make_colour_rgb(200, 170, 130);
 spriteData_idle = sprBeaverIdle
 spriteData_walk = sprBeaverIdle
 spriteData_hurt = sprBeaverHurt
