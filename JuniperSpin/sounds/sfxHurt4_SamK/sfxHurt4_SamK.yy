@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxHurt4_SamK",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.56975055,
+  "exportDir":"",
+  "name":"sfxHurt4_SamK",
+  "parent":{
+    "name":"PlayerHurt",
+    "path":"folders/Sounds/Player/PlayerHurt.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxHurt4_SamK.ogg",
+  "volume":1.0,
+}

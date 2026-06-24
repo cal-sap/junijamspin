@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxMichaelJackson2_SamK",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.3972789,
+  "exportDir":"",
+  "name":"sfxMichaelJackson2_SamK",
+  "parent":{
+    "name":"PlayerAction",
+    "path":"folders/Sounds/Player/PlayerAction.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxMichaelJackson2_SamK.ogg",
+  "volume":1.0,
+}

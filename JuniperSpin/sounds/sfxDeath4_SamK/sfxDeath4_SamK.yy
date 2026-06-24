@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxDeath4_SamK",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.7666667,
+  "exportDir":"",
+  "name":"sfxDeath4_SamK",
+  "parent":{
+    "name":"PlayerDeath",
+    "path":"folders/Sounds/Player/PlayerDeath.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxDeath4_SamK.ogg",
+  "volume":1.0,
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxAttack9_SamK",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.384966,
+  "exportDir":"",
+  "name":"sfxAttack9_SamK",
+  "parent":{
+    "name":"PlayerAction",
+    "path":"folders/Sounds/Player/PlayerAction.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxAttack9_SamK.ogg",
+  "volume":1.0,
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxBKing_Sound8",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.6733787,
+  "exportDir":"",
+  "name":"sfxBKing_Sound8",
+  "parent":{
+    "name":"Enemy_Generic",
+    "path":"folders/Sounds/Enemy/Enemy_Generic.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxBKing_Sound8.ogg",
+  "volume":1.0,
+}

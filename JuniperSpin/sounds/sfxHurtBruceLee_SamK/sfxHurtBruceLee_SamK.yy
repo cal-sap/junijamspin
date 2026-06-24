@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxHurtBruceLee_SamK",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.1896598,
+  "exportDir":"",
+  "name":"sfxHurtBruceLee_SamK",
+  "parent":{
+    "name":"PlayerHurt",
+    "path":"folders/Sounds/Player/PlayerHurt.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxHurtBruceLee_SamK.ogg",
+  "volume":1.0,
+}
