@@ -205,13 +205,42 @@ function AddEnemy(_enemyType, _count = 1){	//add enemy to the field (NEEDS WORK)
 
 
 function SpawnWave(_waveNumber){
-	var _wave = waves[_waveNumber]
-	var _eType;
+	var _wave = global.waveData[_waveNumber]
+	if global.useTestWaves _wave = global.testWaveData[_waveNumber]
+	
+	var _eGroup;
 	for(var i = 0; i < array_length(_wave); i++){
-		_eType = _wave[i]
-		AddEnemy(_eType[0],_eType[1])	//Add the given number of the given enemy
+		_eGroup = _wave[i]	//a number of the same enemies
+		AddEnemy(asset_get_index(_eGroup[0]),_eGroup[1])	//Add the given number of the given enemy
 	}
 }
+
+fundData = ""
+if (file_exists("testWaves.json")){
+    var _file = file_text_open_read("testWaves.json");
+	var _jsonStr = ""
+	while (!file_text_eof(_file))
+	{
+	    _jsonStr += file_text_readln(_file);
+	}
+	file_text_close(_file);
+
+	var _data = json_parse(_jsonStr)
+
+	
+	show_debug_message($"PLAIN DATA: {_data}")
+	show_debug_message($"WAVE	_data[0]: {_data[0]}")
+	show_debug_message($"ENEMY	_data[0][0]: {_data[0][0]}")
+	show_debug_message($"NAME	_data[0][0]: {_data[0][0][0]}")
+fundData = _data
+
+	//show_debug_message(_jsonStr)
+	//show_debug_message($"stringify {json_stringify(_jsonStr)}")
+	//show_debug_message($"Parse {json_parse(_jsonStr)}")
+	//show_debug_message($"S&P {json_parse(json_stringify(_jsonStr))}")
+
+}
+
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~

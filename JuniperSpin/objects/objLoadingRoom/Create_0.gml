@@ -1,0 +1,40 @@
+global.useTestWaves = false	//w
+
+///LOAD ALL OF THE DATAS
+if (file_exists("waveData.json")){
+    var _file = file_text_open_read("waveData.json");
+	var _jsonStr = ""
+	while (!file_text_eof(_file)){
+	    _jsonStr += file_text_readln(_file);
+	}
+	file_text_close(_file);
+
+	global.waveData = json_parse(_jsonStr);
+}else{
+	show_error("ERROR: Cannot find waveData.json",1)
+}
+
+if (file_exists("testWaveData.json")){
+    var _file = file_text_open_read("testWaveData.json");
+	var _jsonStr = ""
+	while (!file_text_eof(_file)){
+	    _jsonStr += file_text_readln(_file);
+	}
+	file_text_close(_file);
+
+	global.testWaveData = json_parse(_jsonStr);
+}else{
+	show_error("ERROR: Cannot find testWaveData.json)",0)
+}
+
+//
+//if (file_exists("testWaves.json")){
+//    var _file = file_text_open_read("testWaves.json");
+//	var _jsonStr = ""
+//	while (!file_text_eof(_file))
+//	{
+//	    _jsonStr += file_text_readln(_file);
+//	}
+//	file_text_close(_file);
+//
+//	var _data = json_parse(_jsonStr)

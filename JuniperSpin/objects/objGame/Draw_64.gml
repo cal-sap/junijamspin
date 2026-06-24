@@ -94,9 +94,17 @@ draw_set_font(fontMenu)
 draw_sprite_ext(sprUIMoneyCenter,0,
 			room_width-110,room_height*0.8,_scale,_scale,0,c_white,1)
 draw_text(	room_width-80,room_height*0.8,$"x{invMoney}")
-//draw_text_transformed(room_width-40,room_height*0.9,$"x{invMoney}",_scale,_scale,0)
-	
-	
+
 	
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+if global.useTestWaves{
+	draw_set_colour(c_lime)
+	draw_text(	55*(current_second mod 4 < 2),
+				44*(current_second mod 2 == 0),
+				"[RUNNING testWaveData.json]")
+}
+//draw_text_transformed(room_width-40,room_height*0.9,$"x{invMoney}",_scale,_scale,0)
+	

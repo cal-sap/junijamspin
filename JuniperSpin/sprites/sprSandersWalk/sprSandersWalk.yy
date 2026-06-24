@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Sanders",
-    "path":"folders/Sprites/Sanders.yy",
+    "path":"folders/Sprites/Enemies/Sanders.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

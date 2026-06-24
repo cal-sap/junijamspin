@@ -65,7 +65,6 @@ switch (state) {
 }
 
 //TIMERS
-
 if spin_dustCloudStepLeft > 0{
 if (--spin_dustCloudStepLeft == 0){
 	instance_create_layer(x,y,"GroundFX",objFX,{image_angle: irandom(360)})
