@@ -23,7 +23,7 @@
   ],
   "name":"sprSandersHurt",
   "nineSlice":null,
-  "origin":4,
+  "origin":9,
   "parent":{
     "name":"Sanders",
     "path":"folders/Sprites/Enemies/Sanders.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":128,
-    "yorigin":128,
+    "yorigin":201,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
