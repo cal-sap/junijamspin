@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxTaunt_03_av03x",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.4729252,
+  "exportDir":"",
+  "name":"sfxTaunt_03_av03x",
+  "parent":{
+    "name":"Taunt_Lonald",
+    "path":"folders/Sounds/Enemy/LonaldMgdonald/Taunt_Lonald.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxTaunt_03_av03x.ogg",
+  "volume":1.0,
+}

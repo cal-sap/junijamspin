@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxHurt_03_av03x",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.8768254,
+  "exportDir":"",
+  "name":"sfxHurt_03_av03x",
+  "parent":{
+    "name":"Hurt_Lonald",
+    "path":"folders/Sounds/Enemy/LonaldMgdonald/Hurt_Lonald.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxHurt_03_av03x.ogg",
+  "volume":1.0,
+}
