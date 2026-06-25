@@ -61,6 +61,7 @@
   "resources":[
     {"id":{"name":"fontMenu","path":"fonts/fontMenu/fontMenu.yy",},},
     {"id":{"name":"fontSmall","path":"fonts/fontSmall/fontSmall.yy",},},
+    {"id":{"name":"fontSubMenu","path":"fonts/fontSubMenu/fontSubMenu.yy",},},
     {"id":{"name":"objBushL","path":"objects/objBushL/objBushL.yy",},},
     {"id":{"name":"objBushS","path":"objects/objBushS/objBushS.yy",},},
     {"id":{"name":"objDebugButton","path":"objects/objDebugButton/objDebugButton.yy",},},

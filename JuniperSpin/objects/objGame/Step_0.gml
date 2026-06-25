@@ -22,16 +22,33 @@ if keyboard_check(vk_space){
 
 //AI CONTROLLER
 //MAYBE YOU SHOULD REMOVE THE enemies[] ARRAY SINCE I DONT WANT TO FIND THE INDEX AGAIN
-
-//OLD VERSION
-//for (var i = 0; i < enemyCt; ++i) {
-//	var _enemy = enemies[i]
-//    _enemy.aiState = GUY_STATE.WALK
-//	_enemy.direction = point_direction(_enemy.x,_enemy.y,player.x,player.y)
-//}
-
-
+//NEW VERSION
 with objEnemy {
+	
     aiState = GUY_STATE.WALK	//REPLACE A BEHAVIOR FUNCTION HERE
 	direction = point_direction(x,y,objGame.player.x,objGame.player.y)
 }
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region TIMERs ETC updates
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+if invulnTimeLeft > 0{
+	invulnTimeLeft--
+	if invulnTimeLeft <= 0{
+		invulnTimeLeft = 0
+		EndInvuln()
+	}
+}
+
+//UPDATE ALL Powerups
+for(var i = 0; i < POWERUP.COUNT; i++){
+	powerUp[i].Update()
+}
+
+
+	
+	
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~

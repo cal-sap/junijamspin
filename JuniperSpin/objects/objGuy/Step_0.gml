@@ -41,8 +41,9 @@ switch (state) {
 	break;
 		
     case GUY_STATE.HURT:
-		direction = move_direction	//can only fly in one direction
-		UpdateFloatyMove()
+		//direction = move_direction	//can only fly in one direction
+		//UpdateFloatyMove()
+		UpdateFloatyMove(direction,move_maxSpeed*0.5)
 		if hurt_timeLeft > 0{
 		if (--hurt_timeLeft == 0){
 			BehaveStopHurt()

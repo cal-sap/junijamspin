@@ -21,7 +21,7 @@ player = instance_create_layer(200,200,"Guys",objGuy)
 function PlayerCollideEnemy(_other){
 	if PAUSED return;
 	//DEAL DAMAGE TO OTHER
-	if _other.state == GUY_STATE.HURT return;
+	if _other.state == GUY_STATE.HURT || objGame.invuln return;
 	var _dir = point_direction(x,y,_other.x,_other.y)	//direction to hurt enemy
 	if state == GUY_STATE.SPIN{
 		var _spd = Vec2Magnitude(move_speed)				//force to hurt enemy
@@ -33,6 +33,13 @@ function PlayerCollideEnemy(_other){
 		objGame.Damage()
 	}
 }
+function PlayerDraw(){
+	if !objGame.invuln || (current_time/70) mod 2{
+		draw_self()
+	}
+}
+
+player.DrawGuy = method(player,PlayerDraw)
 player.CollideWithGuy = method(player,PlayerCollideEnemy)
 
 player.drawDirectionArrow = true
@@ -50,14 +57,14 @@ player.drawDirectionArrow = true
 //POWERUP CONFIG
 
 powerUp =	array_create(POWERUP.COUNT)	//(order is decided through enum)
-powerUp[POWERUP.ATTACK]=	new PowerUp("Attack",				sprUpgradesAttack,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.ATTACK		}))
-powerUp[POWERUP.CONTROL]=	new PowerUp("Control",				sprUpgradesControl,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.CONTROL		})) 
-powerUp[POWERUP.HPDROP]=	new PowerUp("Hp Drop\nChance",		sprUpgradesHealthDropChance,	5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.HPDROP		})) 
-powerUp[POWERUP.HPMAX]=		new PowerUp("Max Health",			sprUpgradesHealthUp,			5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.HPMAX		})) 
-powerUp[POWERUP.MONEYDROP]=	new PowerUp("Money Drop\nChance",	sprUpgradesMoneyDropChance,		5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.MONEYDROP	})) 
-powerUp[POWERUP.MONEYUP]=	new PowerUp("Recovery",				sprUpgradesSpeedUp,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.MONEYUP		})) 
-powerUp[POWERUP.STAMINA]=	new PowerUp("Stamina",				sprUpgradesSpeedUp,				5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.STAMINA		})) 
-powerUp[POWERUP.SPEEDMAX]=	new PowerUp("Max Velocity",			sprUpgradesStrengthUp,			5,	10,	4,	instance_create_layer(0,0,"GUI",objPowerupButton,{ powerupID:	POWERUP.SPEEDMAX	})) 
+powerUp[POWERUP.ATTACK]=	new PowerUp(POWERUP.ATTACK,		"Increase Spinning Damage",	sprUpgradesAttack,				5,	10,	4)
+powerUp[POWERUP.CONTROL]=	new PowerUp(POWERUP.CONTROL,	"Spinning Control",			sprUpgradesControl,				5,	10,	4)
+powerUp[POWERUP.HPDROP]=	new PowerUp(POWERUP.HPDROP,		"Hp Drop Chance",			sprUpgradesHealthDropChance,	5,	10,	4)
+powerUp[POWERUP.HPMAX]=		new PowerUp(POWERUP.HPMAX,		"Increase Max Health",		sprUpgradesHealthUp,			5,	10,	4)
+powerUp[POWERUP.MONEYDROP]=	new PowerUp(POWERUP.MONEYDROP,	"Money Drop Chance",		sprUpgradesMoneyDropChance,		5,	10,	4)
+powerUp[POWERUP.MONEYUP]=	new PowerUp(POWERUP.MONEYUP,	"Stamina Recovery Up",		sprUpgradesSpeedUp,				5,	10,	4)
+powerUp[POWERUP.STAMINA]=	new PowerUp(POWERUP.STAMINA,	"Increase maximum Stamina",	sprUpgradesSpeedUp,				5,	10,	4)
+powerUp[POWERUP.SPEEDMAX]=	new PowerUp(POWERUP.SPEEDMAX,	"Max Velocity",				sprUpgradesStrengthUp,			5,	10,	4)
 
 guyNudgeSpeed = 0.5	//the magnitude applied to enemies when touching. A constant weak force, prevents overlapping
 
@@ -66,7 +73,7 @@ healthMaxMax =	healthStart+powerUp[POWERUP.HPMAX].lvlMax		//The highest that Hea
 
 
 //POWERUP EFFECTS
-function UpdatePowerUp(_powerupIndex){
+function UpdatePowerUpEffect(_powerupIndex){
 	var _powRatio = powerUp[_powerupIndex].level / powerUp[_powerupIndex].lvlMax 
 	switch(_powerupIndex) {
 		case POWERUP.ATTACK:
@@ -113,13 +120,14 @@ function UpdatePowerUp(_powerupIndex){
 #region HEARTS & MONEY
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
-invMoney = 120					//
+invMoney = global.money			//saved globally when restarting
 invHealth =		healthStart		//
 invHealthMax =	healthStart		//
 							//healthMaxMax is in powerup section
 heartGraphic = []
+invuln = false;
+invulnTimeMax = 80;
+invulnTimeLeft = 0;
 
 //MAKE HEART GRAPHICS
 for(var i = 0; i < healthMaxMax; i++){
@@ -132,8 +140,39 @@ for(var i = 0; i < healthStart; i++){
 	heartGraphic[i].visible = true;
 }
 
+function StartInvuln(){
+	invulnTimeLeft = invulnTimeMax
+	invuln = true;
+}
+function EndInvuln(){
+	invuln = false;
+}
 
+function Damage(){
+	if invuln return;
+	invHealth--
+	UpdateHealth()
+	StartInvuln()
+	if invHealth <= 0{
+		//DEATH GOES HEREE
+		GameOver()
+	}
+}
+function UpdateHealth(){
+	//Trim to just used hearts (update hearts)
+	for(var i = 0; i < healthMaxMax; i++){
+		if i < invHealth{
+			heartGraphic[i].Recover()
+		}else{
+			heartGraphic[i].Pop()
+		}
+	}	
+}
 
+function GameOver(){
+	ToggleShop(1)
+	StartInvuln()
+}
 	
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -150,6 +189,7 @@ for(var i = 0; i < healthStart; i++){
 //	})
 
 shopOpen = false;
+shopHighlight = 0	//whatever the first powerup is
 
 function TogglePause(_pause = !PAUSED){
 	PAUSED = _pause
@@ -159,6 +199,54 @@ function TogglePause(_pause = !PAUSED){
 function ToggleShop(_open = !shopOpen){
 	shopOpen = _open;
 	TogglePause(shopOpen)
+	
+}
+
+function DrawShopWindow(_x,_y){
+	var _ww =	300	//window width
+	var _wb	=	16	//window buffer
+	var _rh	=	60	//row height
+	draw_set_colour(c_dkgrey)
+	draw_set_alpha(0.75)
+	draw_rectangle(_x,_y,_x+_ww,_y+(_wb*2)+(_rh*POWERUP.COUNT),0)
+	draw_set_colour(c_ltgrey)
+	draw_set_alpha(1)
+	draw_rectangle(_x,_y,_x+_ww,_y+(_wb*2)+(_rh*POWERUP.COUNT),1)
+	draw_set_colour(c_white)
+	for(var i = 0; i < POWERUP.COUNT; i++){
+		DrawShopEntry(_x,_y+_rh*i,i)
+		//DrawShopEntry(_x,_y+_wb*2+_rh*i,i)
+	}
+	
+}
+
+function DrawShopEntry(_x,_y,_powerupIndex,_selected = false){
+	var _powerUp = powerUp[_powerupIndex]
+	var _valid = true;
+	//ICON
+	draw_sprite(_powerUp.sprite,0,_x+12,_y+10)
+	//PURCHASE BOX (move this since its an object)
+	_powerUp.button.x = _x+12
+	_powerUp.button.y = _y+10
+	//NAME
+	draw_set_font(fontMenu)
+	draw_text(_x+83,_y+20,_powerUp.name)
+	//COST
+	draw_set_font(fontSubMenu)
+	draw_text(_x+208,_y+50,$"COST: {_powerUp.GetCost()}")
+	//Level
+	var _level_string = $"LVL {_powerUp.level}"
+	var _max_string =	$"/{_powerUp.lvlMax} max"
+	if _powerUp.fullyLeveled{
+		//Draw that it is maxed out
+		_level_string = $"MAXIMUM LEVEL"
+		_max_string =	$" Wow!!"
+	}
+	var _lm = string_width(_level_string)
+	draw_text(_x+83,_y+50,_level_string)
+	draw_set_font(fontSmall)
+	draw_text(_x+85+_lm,_y+62,_max_string)
+	
 	
 }
 
@@ -176,7 +264,7 @@ if !audio_is_playing(soundTheme){
 }
 function ToggleMute(_muted = !MUTED){
 	MUTED = _muted
-	audio_sound_gain(soundTheme,!MUTED,100)
+	audio_sound_gain(soundTheme,!MUTED,0)
 	
 }
 
@@ -214,6 +302,9 @@ EnemyOnDeath = function(){	//what enemy does on death
 
 function EndOfWaveCheck(){
 	if enemyCt == 0{
+		with objEnemy instance_destroy()
+		enemies = [];
+		enemyCt =	0
 		currentWave++
 	
 		//TEST CASE TO LOOP WAVES
@@ -234,6 +325,23 @@ function AddEnemy(_enemyType, _count = 1){	//add enemy to the field (NEEDS WORK)
 	enemyCt	+=_count
 }
 
+//RESET THJE GAME 
+function CloseShop(){
+	with objEnemy instance_destroy()
+	player.BehaveStartIdle()
+	enemies =	[]
+	enemyCt =	0
+	validSpawns = []
+	currentWave = 0;
+	SpawnWave(0)	//Start the wave over again
+	
+	invHealth = invHealthMax
+	UpdateHealth()
+
+	shopOpen = false
+	TogglePause(false)
+}
+	
 
 function SpawnWave(_waveNumber){
 	var _wave = global.waveData[_waveNumber]
@@ -242,6 +350,7 @@ function SpawnWave(_waveNumber){
 	validSpawns = []
 	with objSpawner CheckReady()
 	show_debug_message($"VALID SPAWNS: {validSpawns}")
+	show_debug_message($"enemies: {enemies}")
 	
 	var _eGroup;
 	
@@ -255,32 +364,15 @@ function SpawnWave(_waveNumber){
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-function Damage(){
-	invHealth--
-	UpdateHealth()
-	if invHealth <= 0{
-		room_restart()
-	}
-}
-function UpdateHealth(){
-	//Trim to just used hearts (update hearts)
-	for(var i = 0; i < healthMaxMax; i++){
-		if i < invHealth{
-			heartGraphic[i].Recover()
-		}else{
-			heartGraphic[i].Pop()
-		}
-	}	
-}
-
 
 //APPLY POWERUP VALUES (may be different than objGuy defualt)
 for(var i = 0; i < POWERUP.COUNT; i++){
-	UpdatePowerUp(i)
+	UpdatePowerUpEffect(i)
 }
 
 collideTilemap = layer_tilemap_get_id("Walls");
 
 //ToggleMute()
 alarm[0] = 1	//Spawns the first wave... needs to wait until spawners are present
-	
+//ToggleMute(1)
+audio_master_gain(0.15)

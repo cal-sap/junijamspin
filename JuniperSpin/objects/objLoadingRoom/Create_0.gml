@@ -1,4 +1,5 @@
 global.useTestWaves = false	//w
+global.money = 0	//w
 global.enemyList = [objEnemy,objEnemyBeaver];	//this isn't going to be used, but needs to be defined for some reason
 
 #macro WINDOWW 1280

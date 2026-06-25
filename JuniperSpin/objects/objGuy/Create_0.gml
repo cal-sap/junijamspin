@@ -65,7 +65,6 @@ spin_soundStart = sfxFireSpinStart
 spin_soundEnd = sfxSpinStart
 
 
-
 stamina_max = 400		//steps (60fps) for a full bar
 stamina_startCost = 50	//minimum downtime to take inbetween spins (prevents spamming)
 stamina_spinCost = 10	//additional cost of stamina when "shifting up" in power.
@@ -76,8 +75,9 @@ state = GUY_STATE.IDLE		//[NOT PARAMETER]
 aiState = GUY_STATE.IDLE	//[NOT PARAMETER]
 stateChanReady = true;		//[NOT PARAMETER]
 
-debug_bounceWall = true;
 debug = false;
+
+DrawGuy = draw_self
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,7 +115,8 @@ BehaveStopHurt = function(){
 }
 
 BehaveStartSpin = function(){
-	if !spin_ready return;
+	if !spin_ready || objGame.invuln return;
+
 	stamina -= stamina_startCost
 	state = GUY_STATE.SPIN
 	spin_level = 0
@@ -166,6 +167,7 @@ CollideWithGuy = function(_other){
 	move_speed = Vec2Add(move_speed,	new Vec2(
 		lengthdir_x(objGame.guyNudgeSpeed,_awayDir),
 		lengthdir_y(objGame.guyNudgeSpeed,_awayDir)))
+	UpdateMoveDirection()
 }
 
 UpdateAnimSpeed = function(){
@@ -192,10 +194,13 @@ function UpdateMoveDirection(_updatePointingDirection = false){
 function UpdateFloatyMove(_acceldir = undefined,_maxSp = move_maxSpeed){
 	var _accel = move_accel
 	var _decel = move_decel
-	if state == GUY_STATE.SPIN{
-		_accel = spin_accel
-		_decel = spin_decel
+	
+	switch(state){
+		case GUY_STATE.SPIN: _accel = spin_accel;	_decel = spin_decel; break;
+		case GUY_STATE.HURT: _accel *= 2;			 break;
 	}
+	
+
 	var _mag = Vec2Magnitude(move_speed)		//how fast its currently moving
 	
 	if is_undefined(_acceldir) || _mag > _maxSp{	//Not acceling in any direction OR going too fast, slow down
@@ -234,13 +239,11 @@ function UpdateFloatyMove(_acceldir = undefined,_maxSp = move_maxSpeed){
 	}
 	
 	if (_collideX || _collideY) UpdateMoveDirection(true)
-
+	direction = move_direction
 	
 	//MOVE
 	x += move_speed.x
 	y += move_speed.y
-	
-	//move_and_collide(	move_speed.x,	move_speed.y,	[objGame.collideTilemap,objGuy])
 
 }
 

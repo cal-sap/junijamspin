@@ -1,1 +1,0 @@
-objGame.ToggleShop()

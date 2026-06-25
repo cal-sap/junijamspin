@@ -16,7 +16,7 @@ if debug{
 	    case GUY_STATE.HURT:	_stateString += "HURT";	break;
 	    default:				_stateString += "?UNKNOWN?";	break;
 	}
-	_stateString += $" ----- Spd:{Vec2Magnitude(move_speed)}"
+	_stateString += $" -----\nSpd:{Vec2Magnitude(move_speed)}"
 	if state == GUY_STATE.SPIN _stateString += $"\nSpin Level: {spin_level}"
 
 //MOVE DIRECTION ARROW
@@ -33,7 +33,7 @@ if debug{
 		20)
 		
 //PRINTING THE ACTUAL TEXT
-	draw_text(x,y-100,_stateString)
+	draw_text(x-111,y-100,_stateString)
 	
 }
 
@@ -44,7 +44,7 @@ if drawDirectionArrow{
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-draw_self()
+DrawGuy()
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region SPINNING LINE

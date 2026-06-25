@@ -7,8 +7,8 @@ spriteData_dead = sprBeaverHurt
 mask_index		= sprBeaverIdle
 
 
-move_accel = 0.3		//these are additive to the speed
-move_maxSpeed = 3		
+//move_accel = 0.3		//DONT FUCK WIHT THE ACCELERATION
+move_maxSpeed = 2
 
 hp_max =	3			//
 hp =	hp_max			//[NOT PARAMETER]

@@ -1,6 +1,5 @@
 
-//Find Active
-active =	objGame.powerUp[powerupID].level < objGame.powerUp[powerupID].lvlMax && 
-			objGame.invMoney >= objGame.powerUp[powerupID].GetCost() &&
-			objGame.shopOpen
+var _puEntry = objGame.powerUp[powerupID]
 
+//Find Active
+active =	_puEntry.buyable &&	objGame.shopOpen
