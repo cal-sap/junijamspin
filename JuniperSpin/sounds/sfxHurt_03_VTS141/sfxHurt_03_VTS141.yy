@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxHurt_03_VTS141",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.95201814,
+  "exportDir":"",
+  "name":"sfxHurt_03_VTS141",
+  "parent":{
+    "name":"Hurt_Bickey",
+    "path":"folders/Sounds/Enemy/Enemy_Bickey/Hurt_Bickey.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxHurt_03_VTS141.wav",
+  "volume":1.0,
+}
