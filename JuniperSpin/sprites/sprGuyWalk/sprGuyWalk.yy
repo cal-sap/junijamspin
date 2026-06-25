@@ -43,7 +43,7 @@
     ],
     "top":0,
   },
-  "origin":4,
+  "origin":9,
   "parent":{
     "name":"Guy",
     "path":"folders/Sprites/Guy.yy",
@@ -99,7 +99,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":64,
-    "yorigin":64,
+    "yorigin":120,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
