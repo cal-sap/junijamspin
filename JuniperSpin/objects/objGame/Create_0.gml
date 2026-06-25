@@ -318,7 +318,7 @@ function AddEnemy(_enemyType, _count = 1){	//add enemy to the field (NEEDS WORK)
 	repeat(_count){
 		var _spawner = validSpawns[irandom(array_length(validSpawns)-1)]
 		
-		array_push(enemies,instance_create_layer(_spawner.x,_spawner.y,"Guys",_enemyType))
+		array_push(enemies,instance_create_layer(_spawner.x+random_range(-4,4),_spawner.y+random_range(-4,4),"Guys",_enemyType))
 		_newEnemy = array_last(enemies)
 		_newEnemy.OnDeath = method(_newEnemy,EnemyOnDeath)
 	}
