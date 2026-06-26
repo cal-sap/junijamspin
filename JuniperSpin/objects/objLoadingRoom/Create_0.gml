@@ -4,6 +4,7 @@ global.enemyList = [objEnemy,objEnemyBeaver];	//this isn't going to be used, but
 
 #macro WINDOWW 1280
 #macro WINDOWH 720
+#macro GUYDEPTHBOTTOM 300
 
 
 ///LOAD ALL OF THE DATAS

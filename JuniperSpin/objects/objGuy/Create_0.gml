@@ -162,7 +162,7 @@ BehaveOnWallBounce = function(){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 
-CollideWithGuy = function(_other){
+CollideWithGuy =	function(_other){
 	if PAUSED return;
 	///nudge out
 	var _awayDir = point_direction(_other.x,_other.y,x,y)
@@ -171,6 +171,8 @@ CollideWithGuy = function(_other){
 		lengthdir_y(objGame.guyNudgeSpeed,_awayDir)))
 	UpdateMoveDirection()
 }
+CollideWithCoin =	function(_other){}	//Only Player picks up coin
+
 
 UpdateAnimSpeed = function(){
 	if PAUSED image_speed = 0;	else image_speed = animSpeed;

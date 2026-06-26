@@ -1,17 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"objSpawner",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"objCoin",
+  "eventList":[],
   "managed":true,
-  "name":"objSpawner",
+  "name":"objCoin",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Items",
+    "path":"folders/Objects/Items.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"objPickup",
+    "path":"objects/objPickup/objPickup.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -30,9 +31,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprSpawner",
-    "path":"sprites/sprSpawner/sprSpawner.yy",
+    "name":"sprPickupCoin",
+    "path":"sprites/sprPickupCoin/sprPickupCoin.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

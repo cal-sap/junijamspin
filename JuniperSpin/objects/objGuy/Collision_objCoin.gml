@@ -1,0 +1,1 @@
+CollideWithCoin(other)

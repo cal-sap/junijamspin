@@ -33,14 +33,22 @@ function PlayerCollideEnemy(_other){
 		objGame.Damage()
 	}
 }
+function PlayerCollideCoin(_other){
+	if _other.invuln return
+
+	with _other instance_destroy()
+	objGame.invMoney++
+}
+
 function PlayerDraw(){
-	if !objGame.invuln || (current_time/70) mod 2{
+	if !objGame.invuln || InvulnFlashBool(){
 		draw_self()
 	}
 }
 
 player.DrawGuy = method(player,PlayerDraw)
 player.CollideWithGuy = method(player,PlayerCollideEnemy)
+player.CollideWithCoin = method(player,PlayerCollideCoin)
 
 player.drawDirectionArrow = true
 
@@ -298,6 +306,8 @@ EnemyOnDeath = function(){	//what enemy does on death
 
 	instance_destroy()
 	objGame.EndOfWaveCheck()
+	
+	ScatterCoins(5)
 }
 
 function EndOfWaveCheck(){
@@ -374,5 +384,5 @@ collideTilemap = layer_tilemap_get_id("Walls");
 
 //ToggleMute()
 alarm[0] = 1	//Spawns the first wave... needs to wait until spawners are present
-//ToggleMute(1)
+ToggleMute(1)
 audio_master_gain(0.15)

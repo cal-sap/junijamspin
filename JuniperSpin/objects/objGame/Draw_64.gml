@@ -53,7 +53,13 @@ draw_text(400,30,_waveString)
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#region DepthSorting Guys
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	with objGuy		{depth = GUYDEPTHBOTTOM - y}
+	with objPickup	{depth = GUYDEPTHBOTTOM - y}
+#endregion
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
