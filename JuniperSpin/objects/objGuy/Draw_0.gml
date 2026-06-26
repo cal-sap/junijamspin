@@ -47,7 +47,8 @@ if drawDirectionArrow{
 
 
 DrawShadow()
-DrawGuy()
+//DrawGuy()
+draw_sprite_ext(sprite_index, image_index, x + spin_shakeX, y + spin_shakeY, image_xscale, image_yscale, image_angle, image_blend, image_alpha)
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region SPINNING LINE

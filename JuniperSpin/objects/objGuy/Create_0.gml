@@ -67,6 +67,13 @@ spin_knockbackMult = 1.0
 spin_soundStart = sfxFireSpinStart
 spin_soundEnd = sfxSpinStart
 
+//SpinShake
+spin_shakeAmount = 2
+spin_shakeX = 0
+spin_shakeY = 0
+spin_shakeTimeMax = 10
+spin_shakeTimeLeft = 0
+
 
 stamina_max = 400		//steps (60fps) for a full bar
 stamina_startCost = 50	//minimum downtime to take inbetween spins (prevents spamming)
@@ -117,7 +124,12 @@ BehaveStopHurt = function(){
 }
 
 BehaveStartSpin = function(){
-	if !spin_ready || objGame.invuln return;
+	spin_shakeTimeLeft = spin_shakeTimeMax //shake player
+    if objGame.invuln return;
+    if !spin_ready{
+        PlaySound(SFX.SPIN_DENIED)
+        return;
+    }
 	if stamina < stamina_max * 0.25 return; //return at 25% threshold
 	stamina -= stamina_startCost
 	state = GUY_STATE.SPIN

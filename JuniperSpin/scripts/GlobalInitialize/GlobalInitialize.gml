@@ -21,6 +21,7 @@ enum SFX{
 	SPIN_SPEED_UP,
 	SPIN_END,
 	SPIN_READY,
+	SPIN_DENIED,
 	SPIN_WALLBOUNCE,
 	
 	PICKUP_COIN,
@@ -68,6 +69,7 @@ SFX_LIST[SFX.SPIN_SPEED_UP]	=	[]		//This is pitched up for each speed beyond the
 SFX_LIST[SFX.SPIN_END	]	=	[ sfxSpinEnd ]
 SFX_LIST[SFX.SPIN_READY	]	=	[ sfxPistolLoad1 ]
 SFX_LIST[SFX.SPIN_WALLBOUNCE] =	[ sfxKick1, sfxKick2 ]
+SFX_LIST[SFX.SPIN_DENIED	]	=	[ sfxBoop5 ]
 							
 SFX_LIST[SFX.PICKUP_COIN]	=	[ sfxBeep1,sfxBeep2,sfxBeep3 ]
 SFX_LIST[SFX.PICKUP_RECOVERY] =	[ sfxConfirm53]
