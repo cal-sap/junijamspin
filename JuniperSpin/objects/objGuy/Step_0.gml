@@ -79,10 +79,19 @@ if (--spin_dustCloudStepLeft == 0){
 if state != GUY_STATE.SPIN{
 	if stamina < stamina_max{
 		stamina = min(stamina+stamina_recoverMult,stamina_max)	
-		if stamina == stamina_max{
+		if stamina == stamina_max && !spin_ready{
 			stamina = stamina_max
 			spin_ready = true;	
 			PlaySound(SFX.SPIN_READY)
 		}
 	}	
+	
+//COOLDOWN
+	if spin_cooldownLeft > 0{
+    if (--spin_cooldownLeft == 0){
+        spin_ready = true
+    }
 }
+}
+
+

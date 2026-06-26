@@ -118,7 +118,7 @@ BehaveStopHurt = function(){
 
 BehaveStartSpin = function(){
 	if !spin_ready || objGame.invuln return;
-
+	if stamina < stamina_max * 0.25 return; //return at 25% threshold
 	stamina -= stamina_startCost
 	state = GUY_STATE.SPIN
 	spin_level = 0
@@ -137,7 +137,13 @@ BehaveStopSpin = function(){
 	//enforce a clean spinning reset
 	spin_timeLeft = 0
 	spin_dustCloudStepLeft = 0
+	if stamina <= 0 {
+		stamina = 0
+		spin_cooldownLeft = spin_cooldownMax * 3 //cooldown penalty from empty stamina
+	}
+	else {
 	spin_cooldownLeft = spin_cooldownMax
+	}
 	spin_ready = false	//if you are not affected by cooldown
 	BehaveStartIdle()
 	PlaySound(SFX.SPIN_END)

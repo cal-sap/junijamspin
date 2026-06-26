@@ -49,8 +49,8 @@
     {"$GMFolder":"","%Name":"Wendy","folderPath":"folders/Sprites/Enemies/Wendy.yy","name":"Wendy","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Foliage","folderPath":"folders/Sprites/Foliage.yy","name":"Foliage","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"FX","folderPath":"folders/Sprites/FX.yy","name":"FX","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"MainMenu","folderPath":"folders/Sprites/MainMenu.yy","name":"MainMenu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Guy","folderPath":"folders/Sprites/Guy.yy","name":"Guy","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"MainMenu","folderPath":"folders/Sprites/MainMenu.yy","name":"MainMenu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"UI","folderPath":"folders/Sprites/UI.yy","name":"UI","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[
