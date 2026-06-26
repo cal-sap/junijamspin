@@ -1,3 +1,22 @@
 [
-[["objEnemy", 8]]
+	[["objLonald", 2], ["objEnemy", 1]],
+	[["objEnemyBeaver", 3], ["objEnemy", 1]],
+	[["objEnemyBeaver", 2], ["objEnemy", 2]],
+
+	[["objEnemyBeaver", 3], ["objEnemy", 2], ["objBickey", 1]],
+	[["objEnemyBeaver", 3], ["objEnemy", 2], ["objBickey", 2]],
+
+	[["objEnemyBeaver", 3], ["objEnemy", 2], ["objBickey", 2], ["objLonald", 1]],
+	[["objEnemyBeaver", 4], ["objEnemy", 2], ["objBickey", 2], ["objLonald", 2]],
+
+	[["objEnemyBeaver", 4], ["objEnemy", 3], ["objBickey", 2], ["objLonald", 2], ["objBKing", 1]],
+	[["objEnemyBeaver", 4], ["objEnemy", 3], ["objBickey", 3], ["objLonald", 2], ["objBKing", 1]],
+
+	[["objEnemyBeaver", 4], ["objEnemy", 3], ["objBickey", 3], ["objLonald", 2], ["objBKing", 1], ["objWhendy", 1]],
+	[["objEnemyBeaver", 5], ["objEnemy", 3], ["objBickey", 3], ["objLonald", 3], ["objBKing", 2], ["objWhendy", 1]],
+
+	[["objEnemyBeaver", 5], ["objEnemy", 4], ["objBickey", 3], ["objLonald", 3], ["objBKing", 2], ["objWhendy", 1], ["objJuniper", 1]],
+	[["objEnemyBeaver", 5], ["objEnemy", 4], ["objBickey", 4], ["objLonald", 3], ["objBKing", 2], ["objWhendy", 2], ["objJuniper", 1]],
+	[["objEnemyBeaver", 6], ["objEnemy", 4], ["objBickey", 4], ["objLonald", 4], ["objBKing", 3], ["objWhendy", 2], ["objJuniper", 2]],
+	[["objEnemyBeaver", 6], ["objEnemy", 5], ["objBickey", 4], ["objLonald", 4], ["objBKing", 3], ["objWhendy", 3], ["objJuniper", 2]]
 ]
