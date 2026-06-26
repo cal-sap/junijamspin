@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"sfxHurt_03_VTS141",
   "parent":{
-    "name":"Hurt_Bickey",
-    "path":"folders/Sounds/Enemy/Enemy_Bickey/Hurt_Bickey.yy",
+    "name":"Enemy_Bickey",
+    "path":"folders/Sounds/Enemy/Enemy_Bickey.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

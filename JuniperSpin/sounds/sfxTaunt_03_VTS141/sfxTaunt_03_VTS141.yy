@@ -14,13 +14,13 @@
   "exportDir":"",
   "name":"sfxTaunt_03_VTS141",
   "parent":{
-    "name":"Taunt_Bickey",
-    "path":"folders/Sounds/Enemy/Enemy_Bickey/Taunt_Bickey.yy",
+    "name":"Enemy_Bickey",
+    "path":"folders/Sounds/Enemy/Enemy_Bickey.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxTaunt_03_VTS141.wav",
+  "soundFile":"sfxTaunt_03_VTS141.ogg",
   "volume":1.0,
 }

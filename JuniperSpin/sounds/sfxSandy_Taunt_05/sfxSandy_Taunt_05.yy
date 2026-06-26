@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"sfxHurt_02_VTS141",
+  "%Name":"sfxSandy_Taunt_05",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.28768706,
+  "duration":1.9452834,
   "exportDir":"",
-  "name":"sfxHurt_02_VTS141",
+  "name":"sfxSandy_Taunt_05",
   "parent":{
-    "name":"Enemy_Bickey",
-    "path":"folders/Sounds/Enemy/Enemy_Bickey.yy",
+    "name":"Taunt_Sandy",
+    "path":"folders/Sounds/Enemy/ColonalSandy/Taunt_Sandy.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sfxHurt_02_VTS141.ogg",
+  "soundFile":"sfxSandy_Taunt_05.ogg",
   "volume":1.0,
 }

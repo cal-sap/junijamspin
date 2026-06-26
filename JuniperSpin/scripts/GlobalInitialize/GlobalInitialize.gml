@@ -57,46 +57,46 @@ enum SFX{
 }
 
 
-SFX_LIST[SFX.MENU_HOVER	]	=	[]
-SFX_LIST[SFX.MENU_CLICK	]	=	[]
+SFX_LIST[SFX.MENU_HOVER	]	=	[ sfxButton2 ]
+SFX_LIST[SFX.MENU_CLICK	]	=	[ sfxButton1 ]
 								
-SFX_LIST[SFX.SPIN_START	]	=	[]
-SFX_LIST[SFX.SPIN_LOOP	]	=	[]		//?? haven't tested this out
+SFX_LIST[SFX.SPIN_START	]	=	[ sfxSpinStart]
+SFX_LIST[SFX.SPIN_LOOP	]	=	[ sfxSpinStart]		//?? haven't tested this out
 SFX_LIST[SFX.SPIN_SPEED_UP]	=	[]		//This is pitched up for each speed beyond the first
-SFX_LIST[SFX.SPIN_END	]	=	[]
-SFX_LIST[SFX.SPIN_READY	]	=	[]
-SFX_LIST[SFX.SPIN_WALLBOUNCE] =	[]
+SFX_LIST[SFX.SPIN_END	]	=	[ sfxSpinEnd ]
+SFX_LIST[SFX.SPIN_READY	]	=	[ sfxPistolLoad1 ]
+SFX_LIST[SFX.SPIN_WALLBOUNCE] =	[ sfxKick1, sfxKick2 ]
 							
-SFX_LIST[SFX.PICKUP_COIN]	=	[sfxBeep1,sfxBeep2,sfxBeep3]
-SFX_LIST[SFX.PICKUP_RECOVERY] =	[]
+SFX_LIST[SFX.PICKUP_COIN]	=	[ sfxBeep1,sfxBeep2,sfxBeep3 ]
+SFX_LIST[SFX.PICKUP_RECOVERY] =	[ sfxConfirm53]
 							
-SFX_LIST[SFX.ENEMY_HIT_S]	=	[]
-SFX_LIST[SFX.ENEMY_HIT_M]	=	[]
-SFX_LIST[SFX.ENEMY_HIT_L]	=	[]
+SFX_LIST[SFX.ENEMY_HIT_S]	=	[ sfxPierce ]
+SFX_LIST[SFX.ENEMY_HIT_M]	=	[ sfxPierce ]
+SFX_LIST[SFX.ENEMY_HIT_L]	=	[ sfxPierce ]
 SFX_LIST[SFX.ENEMY_KO]		=	[]
 SFX_LIST[SFX.ENEMY_BOSS_KO]	=	[]
-SFX_LIST[SFX.ENEMY_FOLIAGE]	=	[]
+SFX_LIST[SFX.ENEMY_FOLIAGE]	=	[  sfx01_grass, sfx02_grass, sfx03_grass, sfx04_grass ]
 							
-SFX_LIST[SFX.E_BKING_TAUNT]	=	[]
-SFX_LIST[SFX.E_BKING_HIT]	=	[]
-SFX_LIST[SFX.E_SANDY_TAUNT]	=	[]
-SFX_LIST[SFX.E_SANDY_HIT]	=	[]
-SFX_LIST[SFX.E_BICKY_TAUNT]	=	[]
-SFX_LIST[SFX.E_BICKY_HIT]	=	[]
-SFX_LIST[SFX.E_LONAL_TAUNT]	=	[]
-SFX_LIST[SFX.E_LONAL_HIT]	=	[]
+SFX_LIST[SFX.E_BKING_TAUNT]	=	[ sfxBiggerBetter1_LavenderVA, sfxBiggerbetter2_LavenderVA, sfxEatlikeaking1_LavenderVA,  sfxEatlikeaking2_LavenderVA, sfxOhyeah1_LavenderVA, sfxOhyeah2_LavenderVA, sfxWherevalueisking1_LavenderVA, sfxWherevalueisking2_LavenderVA ]
+SFX_LIST[SFX.E_BKING_HIT]	=	[ sfxHurt1_LavenderVA, sfxHurt2_LavenderVA, sfxHurt3_LavenderVA, sfxHurt4_LavenderVA, sfxHurt5_LavenderVA, sfxHurt5_LavenderVA, sfxHurt6_LavenderVA ]
+SFX_LIST[SFX.E_SANDY_TAUNT]	=	[ sfxSandy_Damage_02, sfxSandy_Damage_03, sfxSandy_Damage_04, sfxSandy_Damage_05, sfxSandy_Damage_06 ]
+SFX_LIST[SFX.E_SANDY_HIT]	=	[ sfxSandy_Taunt_01, sfxSandy_Taunt_02, sfxSandy_Taunt_03, sfxSandy_Taunt_04, sfxSandy_Taunt_05, sfxSandy_Taunt_06 ]
+SFX_LIST[SFX.E_BICKY_TAUNT]	=	[ sfxBickey_Sound1, sfxBickey_Sound2, sfxBickey_Sound3, sfxTaunt_01_VTS141, sfxTaunt_02_VTS141, sfxTaunt_03_VTS141, sfxTaunt_04_VTS141 ]
+SFX_LIST[SFX.E_BICKY_HIT]	=	[ sfxHurt_01_VTS141, sfxHurt_02_VTS141, sfxHurt_03_VTS141, sfxHurt_04_VTS141 ]
+SFX_LIST[SFX.E_LONAL_TAUNT]	=	[ sfxTaunt_01_av03x, sfxTaunt_02_av03x, sfxTaunt_03_av03x, sfxTaunt_04_av03x ]
+SFX_LIST[SFX.E_LONAL_HIT]	=	[ sfxHurt_01_av03x, sfxHurt_02_av03x, sfxHurt_03_av03x, sfxHurt_04_av03x ]
 							
 SFX_LIST[SFX.PLAYER_HIT]	=	[	sfxHurt1_SamK,	sfxHurt2_SamK,	sfxHurt3_SamK,
 									sfxHurt4_SamK,	sfxHurt5_SamK,	sfxHurt6_SamK,
 									sfxHurt7_SamK,	sfxHurt8_SamK,	sfxHurt9_SamK,	sfxHurt10_SamK]
 SFX_LIST[SFX.PLAYER_KO]		=	[]
-SFX_LIST[SFX.PLAYER_FOLIAGE] =	[]
+SFX_LIST[SFX.PLAYER_FOLIAGE] =	[ sfx01_grass, sfx02_grass, sfx03_grass, sfx04_grass ]
 								
-SFX_LIST[SFX.SHOP_PURCHASE]	=	[]
-SFX_LIST[SFX.SHOP_CANTAFFORD] =	[]
-SFX_LIST[SFX.SHOP_COMPLETE]	=	[]
+SFX_LIST[SFX.SHOP_PURCHASE]	=	[ sfxChing ]
+SFX_LIST[SFX.SHOP_CANTAFFORD] =	[ sfxBoop5 ]
+SFX_LIST[SFX.SHOP_COMPLETE]	=	[ sfxButton1 ]
 							
-SFX_LIST[SFX.WAVE_COMPLETE]	=	[]
+SFX_LIST[SFX.WAVE_COMPLETE]	=	[ sfxConfirm51 ]
 
 PITCHSHIFT_LIST[SFX.PICKUP_COIN]	=	[0.25]	//Will pitch shift randomly between 1	& 1.25
 PITCHSHIFT_LIST[SFX.PLAYER_HIT]	=		[-0.2]	//Will pitch shift randomly between 0.8 & 1
