@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxWhendyHurt_03_Kasabake",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.5592744,
+  "exportDir":"",
+  "name":"sfxWhendyHurt_03_Kasabake",
+  "parent":{
+    "name":"Whendy_Hurt",
+    "path":"folders/Sounds/Enemy/Whendy/Whendy_Hurt.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxWhendyHurt_03_Kasabake.ogg",
+  "volume":1.0,
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sfxWhendyTaunt_03_Kasabake",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.4041951,
+  "exportDir":"",
+  "name":"sfxWhendyTaunt_03_Kasabake",
+  "parent":{
+    "name":"Whendy_Taunt",
+    "path":"folders/Sounds/Enemy/Whendy/Whendy_Taunt.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfxWhendyTaunt_03_Kasabake.ogg",
+  "volume":1.0,
+}

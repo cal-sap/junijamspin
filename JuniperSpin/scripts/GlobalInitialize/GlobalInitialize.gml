@@ -41,6 +41,8 @@ enum SFX{
 	E_BICKY_HIT,
 	E_LONAL_TAUNT,
 	E_LONAL_HIT,
+	E_Whend_TAUNT,
+	E_Whend_HIT,
 	
 	PLAYER_HIT,
 	PLAYER_KO,
@@ -85,11 +87,13 @@ SFX_LIST[SFX.E_BICKY_TAUNT]	=	[ sfxBickey_Sound1, sfxBickey_Sound2, sfxBickey_So
 SFX_LIST[SFX.E_BICKY_HIT]	=	[ sfxHurt_01_VTS141, sfxHurt_02_VTS141, sfxHurt_03_VTS141, sfxHurt_04_VTS141 ]
 SFX_LIST[SFX.E_LONAL_TAUNT]	=	[ sfxTaunt_01_av03x, sfxTaunt_02_av03x, sfxTaunt_03_av03x, sfxTaunt_04_av03x ]
 SFX_LIST[SFX.E_LONAL_HIT]	=	[ sfxHurt_01_av03x, sfxHurt_02_av03x, sfxHurt_03_av03x, sfxHurt_04_av03x ]
+SFX_LIST[SFX.E_Whend_TAUNT] =   [ sfxWhendyTaunt_01_Kasabake, sfxWhendyTaunt_02_Kasabake, sfxWhendyTaunt_03_Kasabake, sfxWhendyTaunt_04_Kasabake ]
+SFX_LIST[SFX.E_Whend_HIT]	=	[ sfxWhendyHurt_01_Kasabake, sfxWhendyHurt_02_Kasabake, sfxWhendyHurt_03_Kasabake, sfxWhendyHurt_04_Kasabake ]
 							
 SFX_LIST[SFX.PLAYER_HIT]	=	[	sfxHurt1_SamK,	sfxHurt2_SamK,	sfxHurt3_SamK,
 									sfxHurt4_SamK,	sfxHurt5_SamK,	sfxHurt6_SamK,
 									sfxHurt7_SamK,	sfxHurt8_SamK,	sfxHurt9_SamK,	sfxHurt10_SamK]
-SFX_LIST[SFX.PLAYER_KO]		=	[]
+SFX_LIST[SFX.PLAYER_KO]		=	[ sfxDeath1_SamK, sfxDeath2_SamK, sfxDeath3_SamK, sfxDeath4_SamK, sfxDeath5_SamK, sfxDeath6_SamK, sfxDeath7_SamK ]
 SFX_LIST[SFX.PLAYER_FOLIAGE] =	[ sfx01_grass, sfx02_grass, sfx03_grass, sfx04_grass ]
 								
 SFX_LIST[SFX.SHOP_PURCHASE]	=	[ sfxChing ]
