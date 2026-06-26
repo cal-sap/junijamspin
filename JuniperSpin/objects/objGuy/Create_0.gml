@@ -111,6 +111,7 @@ BehaveStartWalk = function(){
 }
 
 BehaveStartHurt = function(_direction,_knockback){
+	objGame.CameraShake(8)
 	hurt_timeLeft = hurt_timeMax
 	state = GUY_STATE.HURT
 	sprite_index = spriteData_hurt

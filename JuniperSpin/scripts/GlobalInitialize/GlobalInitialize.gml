@@ -46,6 +46,7 @@ enum SFX{
 	E_Whend_HIT,
 	
 	PLAYER_HIT,
+	PLAYER_HIT2,
 	PLAYER_KO,
 	PLAYER_FOLIAGE,
 	
@@ -91,7 +92,8 @@ SFX_LIST[SFX.E_LONAL_TAUNT]	=	[ sfxTaunt_01_av03x, sfxTaunt_02_av03x, sfxTaunt_0
 SFX_LIST[SFX.E_LONAL_HIT]	=	[ sfxHurt_01_av03x, sfxHurt_02_av03x, sfxHurt_03_av03x, sfxHurt_04_av03x ]
 SFX_LIST[SFX.E_Whend_TAUNT] =   [ sfxWhendyTaunt_01_Kasabake, sfxWhendyTaunt_02_Kasabake, sfxWhendyTaunt_03_Kasabake, sfxWhendyTaunt_04_Kasabake ]
 SFX_LIST[SFX.E_Whend_HIT]	=	[ sfxWhendyHurt_01_Kasabake, sfxWhendyHurt_02_Kasabake, sfxWhendyHurt_03_Kasabake, sfxWhendyHurt_04_Kasabake ]
-							
+
+SFX_LIST[SFX.PLAYER_HIT2]	=  	[ sfxWhip ]				
 SFX_LIST[SFX.PLAYER_HIT]	=	[	sfxHurt1_SamK,	sfxHurt2_SamK,	sfxHurt3_SamK,
 									sfxHurt4_SamK,	sfxHurt5_SamK,	sfxHurt6_SamK,
 									sfxHurt7_SamK,	sfxHurt8_SamK,	sfxHurt9_SamK,	sfxHurt10_SamK]

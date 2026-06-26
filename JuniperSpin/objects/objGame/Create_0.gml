@@ -1,3 +1,9 @@
+// Camera Shake
+var _layer = layer_get_id("ScreenShake")
+cam_shakeFX = layer_get_fx(_layer)
+cam_shakeTimeLeft = 0
+cam_shakeTimeMax = 14
+
 
 PAUSED = false;
 enum POWERUP{
@@ -160,6 +166,13 @@ invuln = false;
 invulnTimeMax = 80;
 invulnTimeLeft = 0;
 
+//Camera Shake Function
+CameraShake = function(_amount, _time = cam_shakeTimeMax){
+    fx_set_parameter(cam_shakeFX, "g_Magnitude", _amount)
+    layer_enable_fx(layer_get_id("ScreenShake"), true)
+    cam_shakeTimeLeft = _time
+}
+
 //MAKE HEART GRAPHICS
 for(var i = 0; i < healthMaxMax; i++){
 	heartGraphic[i] = instance_create_layer(40+70*i,WINDOWH-100,"GUI",objHeartMark)
@@ -189,8 +202,10 @@ function Damage(){
 		//DEATH GOES HEREE
 		GameOver()
 	}
-	var _bloop = SFX.PLAYER_HIT
+	//var _bloop = SFX.PLAYER_HIT
 	PlaySound(SFX.PLAYER_HIT)
+	PlaySound(SFX.PLAYER_HIT2)
+	CameraShake(4)
 }
 function UpdateHealth(){
 	//Trim to just used hearts (update hearts)
@@ -399,6 +414,7 @@ function SpawnWave(_waveNumber){
 
 #endregion
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 //APPLY POWERUP VALUES (may be different than objGuy defualt)

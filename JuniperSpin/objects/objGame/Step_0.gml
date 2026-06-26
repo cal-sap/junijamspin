@@ -47,7 +47,12 @@ for(var i = 0; i < POWERUP.COUNT; i++){
 	powerUp[i].Update()
 }
 
-
+//SCREEN SHAKE
+if cam_shakeTimeLeft > 0{
+    if (--cam_shakeTimeLeft == 0){
+        layer_enable_fx(layer_get_id("ScreenShake"), false)
+    }
+}
 	
 	
 #endregion
