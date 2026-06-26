@@ -96,10 +96,11 @@
     {"$GMRInstanceLayer":"","%Name":"GUI","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_40AEF427","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_40AEF427","objectId":{"name":"objShopButton","path":"objects/objShopButton/objShopButton.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1120.0,"y":512.0,},
       ],"layers":[],"name":"GUI","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRTileLayer":"","%Name":"Walls","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Walls","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":26,"SerialiseWidth":26,"TileCompressedData":[
-          -27,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,
-          -2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,
-          3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-2,3,-24,0,-27,3,
+    {"$GMRTileLayer":"","%Name":"Walls","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Walls","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":27,"SerialiseWidth":26,"TileCompressedData":[
+          1,18,-11,1,-3,2,-10,5,2,7,8,-24,0,2,15,8,-24,0,2,15,8,-24,0,2,23,24,-24,0,2,39,8,-24,0,2,39,8,-24,0,
+          2,39,8,-24,0,2,39,8,-24,0,2,39,24,-24,0,2,39,8,-24,0,2,15,8,-24,0,2,15,8,-24,0,2,15,8,-24,0,2,15,8,-24,
+          0,2,15,24,-24,0,2,39,8,-24,0,2,39,8,-24,0,2,39,24,-24,0,2,39,8,-24,0,2,15,8,-24,0,2,15,8,-24,0,2,55,
+          8,-24,0,2,31,24,-24,0,2,55,8,-24,0,2,31,8,-24,0,2,55,56,-24,57,1,63,
         ],"TileDataFormat":1,},"tilesetId":{"name":"tileWall","path":"tilesets/tileWall/tileWall.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRInstanceLayer":"","%Name":"Control","depth":200,"effectEnabled":true,"effectType":null,"gridX":64,"gridY":64,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_43E2F4F3","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_43E2F4F3","objectId":{"name":"objGame","path":"objects/objGame/objGame.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":64.0,"y":64.0,},
@@ -209,10 +210,10 @@
   "resourceType":"GMRoom",
   "resourceVersion":"2.0",
   "roomSettings":{
-    "Height":1664,
+    "Height":1700,
     "inheritRoomSettings":false,
     "persistent":false,
-    "Width":1664,
+    "Width":1660,
   },
   "sequenceId":null,
   "views":[
