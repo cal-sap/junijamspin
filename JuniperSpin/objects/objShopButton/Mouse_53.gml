@@ -6,4 +6,5 @@ if _clickCollide && objGame.shopOpen {
 	//global.money = objGame.invMoney
 	objGame.CloseShop();
 
+	PlaySound(SFX.SHOP_COMPLETE)
 }

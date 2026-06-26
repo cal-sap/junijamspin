@@ -77,10 +77,12 @@ if (--spin_dustCloudStepLeft == 0){
 
 //RECOVER STAMINA
 if state != GUY_STATE.SPIN{
-	if stamina < stamina_max stamina = min(stamina+stamina_recoverMult,stamina_max)
-	else {
-		stamina = stamina_max
-		spin_ready = true;
-	}
-	
+	if stamina < stamina_max{
+		stamina = min(stamina+stamina_recoverMult,stamina_max)	
+		if stamina == stamina_max{
+			stamina = stamina_max
+			spin_ready = true;	
+			PlaySound(SFX.SPIN_READY)
+		}
+	}	
 }

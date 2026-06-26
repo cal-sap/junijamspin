@@ -78,6 +78,7 @@
     {"id":{"name":"objGuy","path":"objects/objGuy/objGuy.yy",},},
     {"id":{"name":"objHeartMark","path":"objects/objHeartMark/objHeartMark.yy",},},
     {"id":{"name":"objLoadingRoom","path":"objects/objLoadingRoom/objLoadingRoom.yy",},},
+    {"id":{"name":"objMedpack","path":"objects/objMedpack/objMedpack.yy",},},
     {"id":{"name":"objOptions","path":"objects/objOptions/objOptions.yy",},},
     {"id":{"name":"objPickup","path":"objects/objPickup/objPickup.yy",},},
     {"id":{"name":"objPowerupButton","path":"objects/objPowerupButton/objPowerupButton.yy",},},

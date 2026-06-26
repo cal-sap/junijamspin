@@ -6,10 +6,17 @@
 active = false;
 //Can only be clicked when active
 OnClick = function(){
-	show_debug_message("CLICK!")	
-	//Spend money
-	objGame.invMoney -=	objGame.powerUp[powerupID].GetCost()
-	objGame.powerUp[powerupID].level++
-	objGame.UpdatePowerUpEffect(powerupID)
-	sprite_index = sprUIBoxClicked
+	//Check if active after clicking, so 
+	if active{
+		PlaySound(SFX.SHOP_PURCHASE)
+		//Spend money
+		objGame.invMoney -=	objGame.powerUp[powerupID].GetCost()
+		objGame.powerUp[powerupID].level++
+		objGame.UpdatePowerUpEffect(powerupID)
+	
+		sprite_index = sprUIBoxClicked
+	}else{
+		//Unable to buy
+		PlaySound(SFX.SHOP_CANTAFFORD)
+	}
 }

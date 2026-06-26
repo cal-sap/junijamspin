@@ -26,6 +26,7 @@ debugColor2 = c_green
 animSpeed = image_speed;
 drawDirectionArrow = false;
 drawHP = false;
+isBoss = false;
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,7 +110,6 @@ BehaveStartHurt = function(_direction,_knockback){
 	direction = _direction
 	move_speed = Vec2Add(move_speed,Vec2FromMagDir(_knockback,_direction))
 	//move_speed = Vec2FromMagDir(_knockback,_direction)
-	show_debug_message($"OW! {_direction}")
 }
 BehaveStopHurt = function(){
 	hurt_timeLeft = 0
@@ -125,7 +125,7 @@ BehaveStartSpin = function(){
 	sprite_index = spin_lvl_sprite[spin_level]
 	spin_timeLeft = spin_timeMax	//start counting spin time to level up
 	spin_dustCloudStepLeft = spin_dustCloudStepMax
-	PlaySound(spin_soundStart)
+	PlaySound(SFX.SPIN_START)
 }
 BehaveContinueSpin = function(){
 	if !spin_ready return;
@@ -140,7 +140,7 @@ BehaveStopSpin = function(){
 	spin_cooldownLeft = spin_cooldownMax
 	spin_ready = false	//if you are not affected by cooldown
 	BehaveStartIdle()
-	PlaySound(spin_soundEnd,0.8)
+	PlaySound(SFX.SPIN_END)
 }
 BehaveLevelUpSpin = function(){
 	if stamina < stamina_spinCost return;
@@ -151,7 +151,7 @@ BehaveLevelUpSpin = function(){
 	sprite_index = spin_lvl_sprite[spin_level]
 	spin_timeLeft = spin_timeMax	//refresh spin time
 	
-	PlaySound(spin_soundStart,1+(0.12*spin_level))
+	PlaySound(SFX.SPIN_SPEED_UP,1+(0.12*spin_level))
 }
 BehaveOnWallBounce = function(){
 
@@ -172,6 +172,7 @@ CollideWithGuy =	function(_other){
 	UpdateMoveDirection()
 }
 CollideWithCoin =	function(_other){}	//Only Player picks up coin
+CollideWithMedpack =function(_other){}	//Only Player picks up coin
 
 
 UpdateAnimSpeed = function(){
@@ -257,8 +258,12 @@ function DrawUISpinBar(_amount,_color = c_aqua){
 }
 	
 Damage = function(_amount){
-	show_debug_message(hp)
 	hp -= _amount
+	if _amount <= 3{		PlaySound(SFX.ENEMY_HIT_S)}
+	else if _amount <= 6{	PlaySound(SFX.ENEMY_HIT_M)}
+	else {					PlaySound(SFX.ENEMY_HIT_L)}
+	
+	
 	if hp <= 0
 	OnDeath()
 }

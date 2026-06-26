@@ -7,7 +7,7 @@
   },
   "bitDepth":1,
   "channelFormat":0,
-  "compression":0,
+  "compression":1,
   "compressionQuality":4,
   "conversionMode":0,
   "duration":51.0,
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"soundTheme.ogg",
-  "volume":0.55,
+  "volume":1.0,
 }

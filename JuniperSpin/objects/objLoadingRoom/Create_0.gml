@@ -6,6 +6,8 @@ global.enemyList = [objEnemy,objEnemyBeaver];	//this isn't going to be used, but
 #macro WINDOWH 720
 #macro GUYDEPTHBOTTOM 300
 
+GlobalInitialize()
+
 
 ///LOAD ALL OF THE DATAS
 if (file_exists("waveData.json")){

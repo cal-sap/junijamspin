@@ -1,1 +1,1 @@
-ToggleMute()
+ToggleMusicMute()

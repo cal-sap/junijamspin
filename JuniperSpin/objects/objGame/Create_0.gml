@@ -34,10 +34,30 @@ function PlayerCollideEnemy(_other){
 	}
 }
 function PlayerCollideCoin(_other){
-	if _other.invuln return
+	if (_other.invuln){
+		return;
+	}
 
 	with _other instance_destroy()
 	objGame.invMoney++
+	
+	PlaySound(SFX.PICKUP_COIN)
+}
+function PlayerCollideMedpack(_other){
+	if (_other.invuln){
+		return;
+	}
+	
+	stamina = stamina_max	//Set the thing
+	spin_ready = true;	
+	with _other instance_destroy()
+	
+	PlaySound(SFX.PICKUP_RECOVERY)
+}
+function PlayerTouchWall(){
+	if state == GUY_STATE.SPIN{
+		PlaySound(SFX.SPIN_WALLBOUNCE)
+	}
 }
 
 function PlayerDraw(){
@@ -49,6 +69,8 @@ function PlayerDraw(){
 player.DrawGuy = method(player,PlayerDraw)
 player.CollideWithGuy = method(player,PlayerCollideEnemy)
 player.CollideWithCoin = method(player,PlayerCollideCoin)
+player.CollideWithMedpack = method(player,PlayerCollideMedpack)
+player.BehaveOnWallBounce = method(player,PlayerTouchWall)
 
 player.drawDirectionArrow = true
 
@@ -67,18 +89,18 @@ player.drawDirectionArrow = true
 powerUp =	array_create(POWERUP.COUNT)	//(order is decided through enum)
 powerUp[POWERUP.ATTACK]=	new PowerUp(POWERUP.ATTACK,		"Increase Spinning Damage",	sprUpgradesAttack,				5,	10,	4)
 powerUp[POWERUP.CONTROL]=	new PowerUp(POWERUP.CONTROL,	"Spinning Control",			sprUpgradesControl,				5,	10,	4)
-powerUp[POWERUP.HPDROP]=	new PowerUp(POWERUP.HPDROP,		"Hp Drop Chance",			sprUpgradesHealthDropChance,	5,	10,	4)
+powerUp[POWERUP.HPDROP]=	new PowerUp(POWERUP.HPDROP,		"Medpack Drop Chance",		sprUpgradesHealthDropChance,	15,	20,	1)
 powerUp[POWERUP.HPMAX]=		new PowerUp(POWERUP.HPMAX,		"Increase Max Health",		sprUpgradesHealthUp,			5,	10,	4)
 powerUp[POWERUP.MONEYDROP]=	new PowerUp(POWERUP.MONEYDROP,	"Money Drop Chance",		sprUpgradesMoneyDropChance,		5,	10,	4)
-powerUp[POWERUP.MONEYUP]=	new PowerUp(POWERUP.MONEYUP,	"Stamina Recovery Up",		sprUpgradesSpeedUp,				5,	10,	4)
-powerUp[POWERUP.STAMINA]=	new PowerUp(POWERUP.STAMINA,	"Increase maximum Stamina",	sprUpgradesSpeedUp,				5,	10,	4)
-powerUp[POWERUP.SPEEDMAX]=	new PowerUp(POWERUP.SPEEDMAX,	"Max Velocity",				sprUpgradesStrengthUp,			5,	10,	4)
+powerUp[POWERUP.MONEYUP]=	new PowerUp(POWERUP.MONEYUP,	"Stamina Recovery Up",		sprUpgradesSpeedUp,				20,	5,	5)
+powerUp[POWERUP.STAMINA]=	new PowerUp(POWERUP.STAMINA,	"Increase maximum Stamina",	sprUpgradesSpeedUp,				15,	10,	1)
+powerUp[POWERUP.SPEEDMAX]=	new PowerUp(POWERUP.SPEEDMAX,	"Max Velocity",				sprUpgradesStrengthUp,			7,	20,	10)
 
 guyNudgeSpeed = 0.5	//the magnitude applied to enemies when touching. A constant weak force, prevents overlapping
 
 healthStart = 3		//
 healthMaxMax =	healthStart+powerUp[POWERUP.HPMAX].lvlMax		//The highest that Health can go
-
+medkitSpawnRate = 5;
 
 //POWERUP EFFECTS
 function UpdatePowerUpEffect(_powerupIndex){
@@ -99,17 +121,18 @@ function UpdatePowerUpEffect(_powerupIndex){
 		case POWERUP.HPMAX:
 			invHealthMax = healthStart+powerUp[POWERUP.HPMAX].level
 			invHealth = invHealthMax
-			UpdateHealth()
 		break;
 		case POWERUP.MONEYDROP:
-			//CODE HERE
+			medkitSpawnRate++
 		break;
 		case POWERUP.MONEYUP:	//SUBSITUTE FOR RECOVERY REPLACE THE ENUM FOR THIS EVENTUALLY
 			player.stamina_recoverMult =	lerp(	1,		4,	_powRatio)		
 		break;
 		case POWERUP.STAMINA:
-			player.stamina_max =			lerp(	200,	600,_powRatio)	
+			player.stamina_max =			floor(lerp(	200,	600,_powRatio))
 			player.stamina = player.stamina_max
+			player.spin_ready = true;
+			
 		break;
 		case POWERUP.SPEEDMAX:
 			player.spin_levelMax = powerUp[_powerupIndex].level
@@ -157,6 +180,7 @@ function EndInvuln(){
 }
 
 function Damage(){
+
 	if invuln return;
 	invHealth--
 	UpdateHealth()
@@ -165,6 +189,8 @@ function Damage(){
 		//DEATH GOES HEREE
 		GameOver()
 	}
+	var _bloop = SFX.PLAYER_HIT
+	PlaySound(SFX.PLAYER_HIT)
 }
 function UpdateHealth(){
 	//Trim to just used hearts (update hearts)
@@ -179,6 +205,7 @@ function UpdateHealth(){
 
 function GameOver(){
 	ToggleShop(1)
+	PlaySound(SFX.PLAYER_KO)
 	StartInvuln()
 }
 	
@@ -189,12 +216,6 @@ function GameOver(){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #region UX / UI
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-//instance_create_layer(64,576,"Control",objDebugButton,{
-//	OnDraw: function(){draw_text(x-20,590,$"Toggle Mute:{MUTED}")},
-//	OnClickFunc: function(){MUTED = !MUTED}
-//	
-//	})
 
 shopOpen = false;
 shopHighlight = 0	//whatever the first powerup is
@@ -270,10 +291,13 @@ function DrawShopEntry(_x,_y,_powerupIndex,_selected = false){
 if !audio_is_playing(soundTheme){
 	audio_play_sound(soundTheme,10,1)
 }
-function ToggleMute(_muted = !MUTED){
-	MUTED = _muted
-	audio_sound_gain(soundTheme,!MUTED,0)
-	
+function ToggleSFXMute(_muted = !SFXMUTED){
+	SFXMUTED = _muted	//stops things from still playing
+}
+
+function ToggleMusicMute(_muted = !MUSICMUTED){
+	MUSICMUTED = _muted
+	audio_sound_gain(soundTheme,!MUSICMUTED,0)
 }
 
 	
@@ -307,11 +331,13 @@ EnemyOnDeath = function(){	//what enemy does on death
 	instance_destroy()
 	objGame.EndOfWaveCheck()
 	
+	PlaySound(isBoss ? SFX.ENEMY_BOSS_KO : SFX.ENEMY_KO)
 	ScatterCoins(5)
 }
 
 function EndOfWaveCheck(){
-	if enemyCt == 0{
+	if enemyCt == 0{	
+		PlaySound(SFX.WAVE_COMPLETE)
 		with objEnemy instance_destroy()
 		enemies = [];
 		enemyCt =	0
@@ -384,5 +410,6 @@ collideTilemap = layer_tilemap_get_id("Walls");
 
 //ToggleMute()
 alarm[0] = 1	//Spawns the first wave... needs to wait until spawners are present
-ToggleMute(1)
-audio_master_gain(0.15)
+//ToggleMusicMute(1)
+//ToggleSFXMute(1)
+audio_master_gain(0.5)
