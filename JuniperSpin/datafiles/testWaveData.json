@@ -1,6 +1,6 @@
 [
-	[["objLonald", 2], ["objEnemy", 1]],
-	[["objEnemyBeaver", 3], ["objEnemy", 1]],
+	[["objLonald", 2], ["objBickey", 1]],
+	[["objEnemyBeaver", 3], ["objWhendy", 1]],
 	[["objEnemyBeaver", 2], ["objEnemy", 2]],
 
 	[["objEnemyBeaver", 3], ["objEnemy", 2], ["objBickey", 1]],
